@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe ArticlesController do
 
+  render_views
+
   describe "GET to #index" do
     let!(:articles) { [FactoryGirl.create(:article)] }
     
@@ -61,5 +63,8 @@ describe ArticlesController do
       end
     end
   end
+
+ 
+
 end
 

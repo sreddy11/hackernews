@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
   validates :title,:url, :presence => true
   validates :url, :format => /^https?:\/\//
 
-  scope :newest, order("updated_at DESC")
+  scope :recent, order("updated_at DESC")
 
     
 end
