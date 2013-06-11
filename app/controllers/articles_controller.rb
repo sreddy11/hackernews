@@ -26,7 +26,6 @@ class ArticlesController < ApplicationController
 
   
 
-  private
 
 
 end
