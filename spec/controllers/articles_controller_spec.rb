@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe ArticlesController do
 
+  render_views
+
   describe "GET to #index" do
     let!(:articles) { [FactoryGirl.create(:article)] }
     
@@ -15,7 +17,7 @@ describe ArticlesController do
     end
   end
 
-  describe "Get to #show" do
+  describe "GET to #show" do
     let!(:article) { FactoryGirl.create(:article) }
 
     before do
@@ -23,12 +25,12 @@ describe ArticlesController do
     end
 
     it { should respond_with(:success) }
-    it "assigns the post" do
+    it "assigns the article" do
       assigns[:article].should == article
     end
   end
   
-  describe "Get to #new" do
+  describe "GET to #new" do
      
     before do
       get :new
@@ -41,7 +43,7 @@ describe ArticlesController do
   end
 
 
-  describe "Post to #create" do
+  describe "POST to #create" do
     context "fields are valid" do
       before do
         post :create, :article => {:title => "new title", :url => "http://cnn.com"}

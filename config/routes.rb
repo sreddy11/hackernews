@@ -1,8 +1,9 @@
 Hackernews::Application.routes.draw do
 
-  resources :articles do
-
-  end
+  resources :users
+  resources :articles
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
