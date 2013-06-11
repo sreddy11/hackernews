@@ -25,7 +25,7 @@ describe ArticlesController do
     end
 
     it { should respond_with(:success) }
-    it "assigns the article" do
+    it "Assigns the article" do
       assigns[:article].should == article
     end
   end
