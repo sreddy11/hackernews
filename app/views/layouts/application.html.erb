@@ -8,11 +8,11 @@
 </head>
 <body>
 
-  <% if session[:user_id] == nil %>
-    <span style ="position:absolute;right:0;top:0"><%= button_to 'Login', new_login_path, :method => :get%></span>
-  <% else %>
-    <span style ="position:absolute;right:0;top:0"><%= "Welcome, #{User.find(session[:user_id]).user_name}" %>
+  <% if logged_in? %> 
+    <span style ="position:absolute;right:0;top:0"><%= "Welcome, #{current_user.user_name}" %>
       <%= button_to 'Logout', logout_path, :method => :delete %></span>
+  <% else %>
+    <span style ="position:absolute;right:0;top:0"><%= button_to 'Login', new_login_path, :method => :get%></span>
   <% end %>
   <% [:notice,:error,:alert].each do |key| %>
     <% if flash[key] %>
