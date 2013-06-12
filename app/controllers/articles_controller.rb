@@ -19,7 +19,12 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(params[:article])
     if @article.save
-      redirect_to(articles_path)
+      if session[:user_id]
+        redirect_to(articles_path)
+      else
+        flash.now[:error] = "Please login first"
+        render(:new)
+      end
     else
       render(:new)
     end

@@ -8,9 +8,8 @@ class LoginsController < ApplicationController
     @user = User.find_by_user_name(login_params[:user_name])
     if @user && @user.authenticate(login_params[:password]) 
       
-      if !(session[:logged_in]) 
+      if session[:user_id] == nil 
         session[:user_id] = @user.id
-        session[:logged_in] = true
         flash[:notice] = "Login Successful"
         redirect_to(articles_path)
       else
@@ -27,7 +26,6 @@ class LoginsController < ApplicationController
   
   
     session[:user_id] = nil
-    session[:logged_in] = false
     flash[:notice] = "Logout Successful"
     redirect_to(articles_path)
 
