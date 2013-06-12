@@ -1,11 +1,9 @@
 require 'spec_helper'
 
 describe UsersController do
-
   render_views
   
   describe "GET to #show" do
-
     let!(:user) { FactoryGirl.create(:user) }
     
     before do
@@ -13,6 +11,7 @@ describe UsersController do
     end
 
     it { should respond_with(:success) }
+    
     it "assigns the user" do
       assigns[:user].should == user
     end
@@ -25,6 +24,7 @@ describe UsersController do
     end
 
     it { should respond_with(:success) }
+    
     it "assigns the user" do
       assigns[:user].should_not == nil
     end
@@ -64,8 +64,6 @@ describe UsersController do
       it "assigns the user" do
         assigns[:user].errors[:password].any?.should == true        
       end
-
-    
     end
 
     context "password confirmation does not match" do
@@ -92,14 +90,9 @@ describe UsersController do
       it "assigns the user" do
         assigns[:user].errors[:user_name].any?.should == true        
       end
-
-    end
-
-
-    
-    
     end
   end
+end
 
 
 
