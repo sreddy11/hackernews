@@ -5,6 +5,7 @@ describe ArticlesController do
   render_views
 
   describe "GET to #index" do
+    
     let!(:articles) { [FactoryGirl.create(:article)] }
     
     before do
@@ -18,6 +19,7 @@ describe ArticlesController do
   end
 
   describe "GET to #show" do
+    
     let!(:article) { FactoryGirl.create(:article) }
 
     before do
@@ -44,7 +46,9 @@ describe ArticlesController do
 
 
   describe "POST to #create" do
+    
     context "fields are valid" do
+      
       before do
         post :create, :article => {:title => "new title", :url => "http://cnn.com"}
       end
