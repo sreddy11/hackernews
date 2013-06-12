@@ -9,8 +9,9 @@
 <body>
 
   <% if logged_in? %> 
-    <span style ="position:absolute;right:0;top:0"><%= "Welcome, #{current_user.user_name}" %>
-      <%= button_to 'Logout', logout_path, :method => :delete %></span>
+    <span style ="position:absolute;right:0;top:0">
+    <%= "Welcome, #{current_user.user_name}" if current_user != nil %>
+    <%= button_to 'Logout', logout_path, :method => :delete %></span>
   <% else %>
     <span style ="position:absolute;right:0;top:0"><%= button_to 'Login', new_login_path, :method => :get%></span>
   <% end %>

@@ -3,4 +3,5 @@
 <% @articles.each do |article| %>
   <h2> <%= link_to article.title, article.url %> </h2>
   <p> <%= "Created at #{article.created_at}" %>
+  <p> <%= "Posted by #{article.user.user_name}"%>
 <% end %>
