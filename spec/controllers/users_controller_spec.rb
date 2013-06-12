@@ -3,10 +3,7 @@ require 'spec_helper'
 describe UsersController do
 
   render_views
-
   
-
-
   describe "GET to #show" do
 
     let!(:user) { FactoryGirl.create(:user) }
@@ -82,7 +79,24 @@ describe UsersController do
       it "assigns the user" do
         assigns[:user].errors.any?.should == true        
       end
+    end
 
+    context "username taken" do
+
+      let!(:existing_user) { FactoryGirl.create(:user) }
+      before do
+        post :create, :user => {:user_name => existing_user.user_name , :password => 'password', 
+          :password_confirmation => 'password'}
+      end
+      it { should respond_with(:success)}
+      it "assigns the user" do
+        assigns[:user].errors[:user_name].any?.should == true        
+      end
+
+    end
+
+
+    
     
     end
   end
@@ -90,4 +104,3 @@ describe UsersController do
 
 
 
-end 
