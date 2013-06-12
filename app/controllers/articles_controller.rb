@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
 
  
   before_filter :find_article, :only => [:show, :edit, :update, :destroy] 
-
+  before_filter :require_authentication, :only => [:new, :create] 
 
   def index
     @articles = Article.newest
@@ -19,12 +19,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(params[:article])
     if @article.save
-      if session[:user_id]
-        redirect_to(articles_path)
-      else
-        flash.now[:error] = "Please login first"
-        render(:new)
-      end
+      redirect_to(article_path(@article), :notice => "Post successfully created")
     else
       render(:new)
     end
@@ -36,6 +31,15 @@ class ArticlesController < ApplicationController
 
   def find_article
     @article = Article.find(params[:id])
+  end
+
+  def require_authentication
+
+    if !logged_in?
+      flash[:error] = "Please login first"
+      redirect_to(new_login_path)
+    end 
+  
   end
 
 end
