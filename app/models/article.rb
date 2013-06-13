@@ -8,5 +8,11 @@ class Article < ActiveRecord::Base
 
   scope :newest, order("updated_at DESC")
 
+  
+  def domain
+     URI.parse(url).host
+  end
+
+
     
 end

@@ -4,7 +4,7 @@ FactoryGirl.define do
 
   factory :article do
     sequence(:title) {|n| "article title #{n}"}
-    url 'http://cnn.com'
+    sequence(:url) {|n| 'http://cnn.com/' + n.to_s()}
     user
   end  
 end    

@@ -26,8 +26,5 @@ class ApplicationController < ActionController::Base
       redirect_to(articles_path)
     end 
   end
-
-  
-
-
+ 
 end
