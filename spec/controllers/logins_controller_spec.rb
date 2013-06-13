@@ -33,7 +33,9 @@ describe LoginsController do
 
    context "user is logged in" do
       before do
-        session[:user_id] = 1
+        existing_user.user_name = 'sreddy1'
+        existing_user.password = 'password'
+        session[:user_id] = existing_user.id
         post :create
       end
 
