@@ -32,7 +32,7 @@ describe ArticlesController do
   
   describe "GET to #new" do
      
-    let!(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryGirl.create(:user) }
    
     context "User is logged in" do
 
@@ -59,14 +59,9 @@ describe ArticlesController do
     end
   end
 
-
-
-
-
   describe "POST to #create" do
-     let!(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryGirl.create(:user) }
 
-    
     context "User is logged in" do
 
       before do 

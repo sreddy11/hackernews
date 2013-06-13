@@ -1,6 +1,4 @@
-<h1> Hacker News </h1>
-<p> <%= link_to "Submit", new_article_path %> </p>
 <% @articles.each do |article| %>
   <h2> <%= link_to article.title, article.url %> </h2>
-  <p> <%= "Created at #{article.created_at}" %>
+  <p> <%= "Created at #{article.created_at}" %> </p>
 <% end %>
