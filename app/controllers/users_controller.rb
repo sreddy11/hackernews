@@ -5,13 +5,18 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    if logged_in?
+      redirect_to(articles_path, :notice => "Please logout of the current account first")
+    else
+      @user = User.new
+    end
   end
 
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to(articles_path)
+      session[:user_id] = @user.id
+      redirect_to(articles_path, :notice => "Account successfully created")
     else
       render :new
     end
