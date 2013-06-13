@@ -29,12 +29,10 @@ describe LoginsController do
 
   describe "POST to #create" do
     
-   let!(:existing_user) { FactoryGirl.create(:user) }
+   let!(:existing_user) { FactoryGirl.create(:user,{:user_name =>'sreddy1', :password => 'password'}) }
 
    context "user is logged in" do
       before do
-        existing_user.user_name = 'sreddy1'
-        existing_user.password = 'password'
         session[:user_id] = existing_user.id
         post :create
       end
