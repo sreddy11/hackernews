@@ -5,15 +5,18 @@ describe ArticlesController do
   render_views
 
   describe "GET to #index" do
-    let!(:articles) { [FactoryGirl.create(:article)] }
+    let!(:articles) { [] }
     
     before do
+      30.times do |i|
+        articles.push(FactoryGirl.create(:article, :updated_at => i.days.ago)) 
+      end
       get :index
     end
 
     it { should respond_with(:success) }
     it "assigns the article" do
-      assigns[:articles].should == articles
+      assigns[:articles].should == articles[0...20]
     end
   end
 
