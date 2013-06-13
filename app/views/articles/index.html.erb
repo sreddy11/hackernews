@@ -4,3 +4,5 @@
   <h2> <%= link_to article.title, article.url %> </h2>
   <p> <%= "Created at #{article.created_at}" %>
 <% end %>
+
+<%= will_paginate @articles %>
