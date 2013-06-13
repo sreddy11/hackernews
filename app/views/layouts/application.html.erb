@@ -20,11 +20,11 @@
 </p>
 
 
-    <% [:notice,:error,:alert].each do |key| %>
-    <% if flash[key] %>
-      <%= flash[key] %>
-    <% end %>
+<% [:notice,:error,:alert].each do |key| %>
+  <% if flash[key] %>
+    <%= flash[key] %>
   <% end %>
+<% end %>
 
 <%= yield %>
 
