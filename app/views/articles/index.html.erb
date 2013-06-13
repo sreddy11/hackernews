@@ -3,3 +3,5 @@
   <p> <%= "Created at #{article.created_at}" %>
   <p> <%= "Posted by #{article.user.user_name}"%>
 <% end %>
+
+<%= will_paginate @articles %>
