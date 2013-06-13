@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   helper_method(:current_user)
   
   def require_authentication
-    if !logged_in?
+    unless logged_in?
       flash[:error] = "Please login first"
       redirect_to(new_login_path)
     end 

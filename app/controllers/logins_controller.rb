@@ -9,12 +9,9 @@ class LoginsController < ApplicationController
     
     @user = User.find_by_user_name(login_params[:user_name])
     if @user && @user.authenticate(login_params[:password]) 
-      
-      if !(logged_in?) 
-        session[:user_id] = @user.id
-        flash[:notice] = "Login Successful"
-        redirect_to(articles_path)
-      end
+      session[:user_id] = @user.id
+      flash[:notice] = "Login Successful"
+      redirect_to(articles_path)
     else
       flash.now[:error] = "Login Invalid"
       render(:new)
