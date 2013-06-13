@@ -1,2 +1,6 @@
-<p> <%= "user: #{@user.user_name}" %> </p>
-<p> <%= "created: #{@user.created_at}" %> </p>
+<p> <%= "#{@user.user_name}" %> </p>
+
+<p> Submissions</p>
+<% @user.articles.each do |article| %>
+  <p> <%= link_to article.title, article.url %> </p>
+<% end %>

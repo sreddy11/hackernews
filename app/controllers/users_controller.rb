@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to(articles_path)
     else
-      render(:new)
+      render :new
     end
   end
 

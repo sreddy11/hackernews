@@ -5,8 +5,9 @@ describe ArticlesController do
   render_views
 
   describe "GET to #index" do
+     
     let!(:articles) { [FactoryGirl.create(:article)] }
-    
+
     before do
       get :index
     end

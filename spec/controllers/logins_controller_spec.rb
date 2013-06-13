@@ -49,7 +49,7 @@ describe LoginsController do
 
      context "Valid login" do
        before do
-         post :create, :login => { :user_name => 'sreddy1', :password => 'password' }
+         post :create, :login => { :user_name => existing_user.user_name , :password => 'password' }
        end
 
        it { should respond_with(:redirect) }
