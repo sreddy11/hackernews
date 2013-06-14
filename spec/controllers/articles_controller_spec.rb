@@ -19,10 +19,7 @@ describe ArticlesController do
   end
 
   describe "GET to #show" do
-<<<<<<< HEAD
     
-=======
->>>>>>> user_registration
     let!(:article) { FactoryGirl.create(:article) }
 
     before do
@@ -30,11 +27,7 @@ describe ArticlesController do
     end
 
     it { should respond_with(:success) }
-<<<<<<< HEAD
-    it "Assigns the article" do
-=======
     it "assigns the article" do
->>>>>>> user_registration
       assigns[:article].should == article
     end
   end
@@ -53,10 +46,7 @@ describe ArticlesController do
 
 
   describe "POST to #create" do
-<<<<<<< HEAD
     
-=======
->>>>>>> user_registration
     context "fields are valid" do
       
       before do
