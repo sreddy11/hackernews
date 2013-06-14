@@ -12,7 +12,7 @@ describe UsersController do
     let!(:user) { FactoryGirl.create(:user) }
     
     before do
-      get :show, :id => user.id
+      get :show, :id => user.to_param
     end
 
     it { should respond_with(:success) }

@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
   attr_accessible :user_name, :password, :password_confirmation
  
+  def to_param
+    user_name
+  end
+
   has_many :articles
   
   validates :user_name, :password, :password_confirmation, :presence => true

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_user_name(params[:id])
   end
 
   def new
@@ -20,6 +20,10 @@ class UsersController < ApplicationController
     else
       render :new
     end
+  end
+
+  def submissions
+     @submissions = User.find_by_user_name(params[:id]).articles
   end
 
 end
