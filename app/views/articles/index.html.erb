@@ -1,7 +1,7 @@
 <% @articles.each do |article| %>
   <h2> <%= link_to article.title, article.url %> </h2>
   <p> <%= "Created at #{article.created_at}" %>
-  <p> <%= "Posted by #{article.user.user_name}"%>
+  <p> <%= link_to "Posted by #{article.user.user_name}", user_path(article.user) %>
 <% end %>
 
 <%= will_paginate @articles %>
