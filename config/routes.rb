@@ -2,8 +2,13 @@ Hackernews::Application.routes.draw do
 
   resources :users
   resources :articles
+  resource :login 
+ 
+  match "login" => "logins#new"
   
-  
+  controller :logins do
+    delete 'logout' => :destroy
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -53,7 +58,7 @@ Hackernews::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+   root :to => 'articles#index'
 
   # See how all your routes lay out with "rake routes"
 

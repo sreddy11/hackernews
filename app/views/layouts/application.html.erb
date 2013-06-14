@@ -8,11 +8,21 @@
 </head>
 <body>
 
-  <% [:notice,:error,:alert].each do |key| %>
-    <% if flash[key] %>
-      <%= flash[key] %>
-    <% end %>
+<h1> Hacker News </h1>
+<p> <%= link_to "News", articles_path %> | <%= link_to "Submit", new_article_path %> |
+<% if logged_in? %> 
+    <%= link_to "Logout (#{current_user.user_name})", logout_path, :method => :delete %></span>
+  <% else %>
+    <%= link_to 'Login/Register', new_login_path,:method => :get %>
   <% end %>
+</p>
+
+
+<% [:notice, :error, :alert].each do |key| %>
+  <% if flash[key] %>
+    <%= flash[key] %>
+  <% end %>
+<% end %>
 
 <%= yield %>
 

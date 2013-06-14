@@ -34,41 +34,87 @@ describe ArticlesController do
   
   describe "GET to #new" do
      
-    before do
-      get :new
+    let(:user) { FactoryGirl.create(:user) }
+   
+    context "User is logged in" do
+
+      before do
+        session[:user_id] = user.id
+        get :new
+      end
+
+      it { should respond_with(:success) }
+      it "assigns the article" do
+        assigns[:article].should_not == nil
+      end
     end
 
-    it { should respond_with(:success) }
-    it "assigns the article" do
-      assigns[:article].should_not == nil
+    context "User is not logged in" do
+      before do
+        session[:user_id] = nil
+        get :new
+      end
+ 
+      it { should respond_with(:redirect) }
+      it { should redirect_to(new_login_path) }
     end
   end
-
 
   describe "POST to #create" do
     
     context "fields are valid" do
-      
       before do
-        post :create, :article => {:title => "new title", :url => "http://cnn.com"}
+        session[:user_id] = nil
+        get :new 
       end
 
       it { should respond_with(:redirect) }
-      it { should redirect_to(articles_path) }
-    end
-
-    context "fields are invalid" do
-      before do
-        post :create
-      end
-      it { should respond_with(:success) }
-      it "Has errors on the post" do
-         assigns[:article].errors.any?.should == true
-      end
+      it { should redirect_to(new_login_path) }
     end
   end
 
+  describe "POST to #create" do
+    let(:user) { FactoryGirl.create(:user) }
+
+    context "User is logged in" do
+
+      before do 
+        session[:user_id] = user.id
+      end
+
+      context "fields are valid" do
+        before do
+          post :create, :article => {:title => "new title", :url => "http://cnn.com"}
+        end
+        
+        it { should respond_with(:redirect) }
+        it { should redirect_to(article_path(assigns[:article].id)) }
+      end
+
+      context "fields are invalid" do
+        before do
+          post :create, :article =>{:title => ''}
+        end
+        
+        it { should respond_with(:success) }
+        it "Has errors on the article" do
+           assigns[:article].errors.any?.should == true
+        end
+      end
+    end
+
+    context "User is not logged in" do
+
+      before do
+        session[:user_id] = nil
+        get :new 
+      end
+
+      it { should respond_with(:redirect) }
+      it { should redirect_to(new_login_path) }
+    end
+  end
+end
  
 
-end
 

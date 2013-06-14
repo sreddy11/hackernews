@@ -5,6 +5,5 @@ class Article < ActiveRecord::Base
   validates :url, :format => /^https?:\/\//
 
   scope :recent, order("updated_at DESC")
-
     
 end
