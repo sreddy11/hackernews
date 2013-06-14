@@ -13,7 +13,7 @@
 <% if logged_in? %> 
     <%= link_to "Logout (#{current_user.user_name})", logout_path, :method => :delete %></span>
   <% else %>
-    <%= link_to 'Login/Register', new_login_path, :method => :get%>
+    <%= link_to 'Login/Register', new_login_path%>
   <% end %>
 
 
