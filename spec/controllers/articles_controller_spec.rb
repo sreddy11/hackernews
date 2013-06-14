@@ -5,17 +5,23 @@ describe ArticlesController do
   render_views
 
   describe "GET to #index" do
-    
-    let!(:articles) { [FactoryGirl.create(:article)] }
+    let!(:articles) { [] }
     
     before do
+      30.times do |i|
+        articles.push(FactoryGirl.create(:article, :updated_at => i.days.ago)) 
+      end
       get :index
     end
 
     it { should respond_with(:success) }
-    it "assigns the article" do
-      assigns[:articles].should == articles
+    it "assigns/paginates the articles" do
+      assigns[:articles].should == articles[0...20]
     end
+    it "gets the next page" do
+       assigns[:articles].paginate(:page => 2).should == articles[20...30]
+    end
+
   end
 
   describe "GET to #show" do

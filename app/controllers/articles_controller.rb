@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   before_filter :require_authentication, :only => [:new, :create] 
 
   def index
-    @articles = Article.recent
+    @articles = Article.recent.paginate(:page=>params[:page], :per_page => 20)
   end
  
   def show
