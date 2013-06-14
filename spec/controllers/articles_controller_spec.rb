@@ -18,6 +18,10 @@ describe ArticlesController do
     it "assigns/paginates the articles" do
       assigns[:articles].should == articles[0...20]
     end
+    it "gets the next page" do
+       assigns[:articles].paginate(:page => 2).should == articles[20...30]
+    end
+
   end
 
   describe "GET to #show" do
