@@ -15,7 +15,7 @@ describe ArticlesController do
     end
 
     it { should respond_with(:success) }
-    it "assigns the article" do
+    it "assigns/paginates the articles" do
       assigns[:articles].should == articles[0...20]
     end
   end
