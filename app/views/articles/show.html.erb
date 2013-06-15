@@ -1,7 +1,7 @@
 <%= link_to @article.title, @article.url %>
 
  <table class = "table table-bordered table-hover">
-    <% @article.comments.each do |comment| %>
+    <% @article.comments.recent.each do |comment| %>
       <tr>
         <td>
           <h6><%= comment.body %> </h6>
