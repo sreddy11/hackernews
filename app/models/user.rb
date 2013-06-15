@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   end
 
   has_many :articles
+  has_many :comments
   
   validates :user_name, :password, :password_confirmation, :presence => true
   validates :user_name, :uniqueness => true

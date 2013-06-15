@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_user_name(params[:id])
+    @user_comments = @user.comments 
   end
 
   def new

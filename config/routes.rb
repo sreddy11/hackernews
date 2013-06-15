@@ -2,8 +2,11 @@ Hackernews::Application.routes.draw do
 
   resources :users do
     resources :submissions
+    resources :comments
   end
-  resources :articles
+  resources :articles do
+    resources :comments
+  end
   resource :login 
  
   match "login" => "logins#new"

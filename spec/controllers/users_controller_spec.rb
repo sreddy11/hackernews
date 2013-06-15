@@ -4,9 +4,6 @@ describe UsersController do
 
   render_views
 
-  
-
-
   describe "GET to #show" do
 
     let!(:user) { FactoryGirl.create(:user) }

@@ -3,7 +3,10 @@
 FactoryGirl.define do
   factory :comment do
   
-    username {"sreddy1"}
-    body {"comment"}  
+    sequence(:body) { |n| "Comment #{n}"}
+    article
+    user
+
+
   end
 end
