@@ -3,7 +3,10 @@ Hackernews::Application.routes.draw do
   resources :users do
     resources :submissions, :only => [:index] 
   end
-  resources :articles
+  
+  resources :articles do
+    resources :comments
+  end
   
   get 'login' => "logins#new"
   post 'login' => "logins#create"
