@@ -1,7 +1,5 @@
 <p> <%= @user.user_name %> </p>
 
-
-
 <div class="tabbable"> 
   <ul class="nav nav-tabs">
     <li class="active"><a href="#tab1" data-toggle="tab">Submissions</a></li>
@@ -14,7 +12,7 @@
       <% end %>
     </div>
     <div class="tab-pane" id="tab2">
-      <% @user.comments.each do |comment| %>
+      <% @user.comments.recent.each do |comment| %>
         <h6><%= comment.body %> </h6>
         <p>Article: <%= link_to "#{comment.article.title}", article_path(comment.article) %>
         |  <%="#{time_ago_in_words(comment.created_at)} ago" %>  </p>
