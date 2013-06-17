@@ -21,9 +21,4 @@ class UsersController < ApplicationController
       render :new
     end
   end
-
-  def submissions
-     @submissions = User.find_by_user_name(params[:id]).articles
-  end
-
 end
