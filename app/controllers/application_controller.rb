@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
   
   private
@@ -28,6 +27,7 @@ class ApplicationController < ActionController::Base
   
   def require_authentication
     unless logged_in?
+      session[:return_page] = request.referer
       flash[:error] = "Please login first"
       redirect_to(login_path)
     end 
@@ -35,8 +35,9 @@ class ApplicationController < ActionController::Base
 
   def require_no_authentication
     if logged_in?
-      flash[:error] = "Already logged in"
-      redirect_to(articles_path)
+      session[:return_page] = request.referer
+      flash.now[:error] = "Already logged in"
+      redirect_to(session[:return_page])
     end 
   end
  

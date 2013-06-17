@@ -12,7 +12,11 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    if logged_in?
+      @article = Article.new
+    else
+      redirect_to(new_login_path, :error => "Please login first")
+    end
   end
 
   def create
