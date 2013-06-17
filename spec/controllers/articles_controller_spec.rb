@@ -6,7 +6,6 @@ describe ArticlesController do
 
   describe "GET to #index" do
     let!(:articles) { [] }
-    
     before do
       30.times do |i|
         articles.push(FactoryGirl.create(:article, :updated_at => i.days.ago)) 
@@ -62,7 +61,7 @@ describe ArticlesController do
       end
  
       it { should respond_with(:redirect) }
-      it { should redirect_to(new_login_path) }
+      it { should redirect_to(login_path) }
     end
   end
 
@@ -75,7 +74,7 @@ describe ArticlesController do
       end
 
       it { should respond_with(:redirect) }
-      it { should redirect_to(new_login_path) }
+      it { should redirect_to(login_path) }
     end
   end
 
@@ -117,7 +116,7 @@ describe ArticlesController do
       end
 
       it { should respond_with(:redirect) }
-      it { should redirect_to(new_login_path) }
+      it { should redirect_to(login_path) }
     end
   end
 end
