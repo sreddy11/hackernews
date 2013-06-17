@@ -8,12 +8,13 @@ describe LoginsController do
 
     context "user is logged in" do
       before do
+        request.env["HTTP_REFERER"] = "www.refer.com"
         session[:user_id] = 1
         get :new
       end
 
       it { should respond_with(:redirect) }
-      it { should redirect_to(articles_path)}
+      it { should redirect_to("www.refer.com")}
     end
 
     context "user is not logged in" do
@@ -34,11 +35,12 @@ describe LoginsController do
    context "user is logged in" do
       before do
         session[:user_id] = 1
+        request.env["HTTP_REFERER"] = "www.refer.com"
         post :create
       end
 
       it { should respond_with(:redirect) }
-      it { should redirect_to(articles_path)}
+      it { should redirect_to("www.refer.com")}
    end
 
    context "user is not logged in" do
@@ -49,12 +51,13 @@ describe LoginsController do
 
      context "Valid login" do
        before do
+         session[:return_page] = "www.refer.com"
          post :create, :login => { :user_name => existing_user.user_name , :password => 'password' }
        end
 
        it { should respond_with(:redirect) }
-       it { should redirect_to(articles_path) }
-       it "has login succes" do
+       it { should redirect_to("www.refer.com") }
+       it "has login success" do
          flash[:notice].should == "Login Successful"
        end
        it "session saved" do
@@ -91,12 +94,13 @@ describe LoginsController do
   
     before do
       session[:user_id] = 1
+      request.env["HTTP_REFERER"] = "www.refer.com"
       delete :destroy      
     end
     
 
     it { should respond_with(:redirect) }
-    it { should redirect_to(articles_path) }
+    it { should redirect_to("www.refer.com") }
 
     it "has logout success" do
       flash[:notice].should == "Logout Successful"
