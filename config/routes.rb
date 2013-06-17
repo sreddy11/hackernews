@@ -1,16 +1,13 @@
 Hackernews::Application.routes.draw do
 
   resources :users do
-    resources :submissions, :only => [:index]
+    resources :submissions, :only => [:index] 
   end
   resources :articles
-  resource :login 
- 
-  match "login" => "logins#new"
   
-  controller :logins do
-    delete 'logout' => :destroy
-  end
+  get 'login' => "logins#new"
+  post 'login' => "logins#create"
+  delete 'logout' => "logins#destroy"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
