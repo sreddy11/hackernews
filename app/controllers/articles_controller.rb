@@ -17,16 +17,13 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(params[:article])
-    @article.user = current_user
+    @article = current_user.articles.build(params[:article])
     if @article.save
       redirect_to(article_path(@article), :notice => "Post successfully created")
     else
       render(:new)
     end
   end
-
-  
 
   private
 
@@ -35,12 +32,4 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def require_authentication
-    if !logged_in?
-      flash[:error] = "Please login first"
-      redirect_to(new_login_path)
-    end 
-  end
-
-  
 end
