@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(:version => 20130615190611) do
     t.string   "title",      :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "page"
     t.integer  "user_id"
   end
 
