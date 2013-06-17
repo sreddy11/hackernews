@@ -17,8 +17,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(params[:article])
-    @article.user = current_user
+    @article = current_user.articles.build(params[:article])
     if @article.save
       redirect_to(article_path(@article), :notice => "Post successfully created")
     else
