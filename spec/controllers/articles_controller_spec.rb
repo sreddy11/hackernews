@@ -56,13 +56,9 @@ describe ArticlesController do
       end
 
       it { should respond_with(:redirect) }
-      it { should redirect_to(new_login_path) }
+      it { should redirect_to(login_path) }
     end
   end
-
-
-
-
 
   describe "POST to #create" do
      let!(:user) { FactoryGirl.create(:user) }
@@ -103,11 +99,8 @@ describe ArticlesController do
       end
 
       it { should respond_with(:redirect) }
-      it { should redirect_to(new_login_path) }
+      it { should redirect_to(login_path) }
     end
-
-
-
   end
 end
 

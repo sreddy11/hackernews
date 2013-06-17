@@ -4,17 +4,29 @@ describe SubmissionsController do
 
   describe "GET to #index" do
      
-    let!(:user) { FactoryGirl.create(:user_with_articles) }
+    context "User exists" do
 
-    before do
-      get :index, :user_id => user.to_param
+      let!(:user) { FactoryGirl.create(:user_with_articles) }
+
+      before do
+        get :index, :user_id => user.to_param
+      end
+
+      it { should respond_with(:success) }
+      it "assigns the submission" do
+        assigns[:submissions].should == user.articles.order("updated_at DESC")
+      end
     end
 
-    it { should respond_with(:success) }
-    it "assigns the submission" do
-      assigns[:submissions].should == user.articles.order("updated_at DESC")
+    context "User non-existent" do
+
+      let!(:user) { FactoryGirl.create(:user) }
+      before do
+        get :index, :user_id => 'lolwut'
+      end
+      
+      it { should raise_exception }
     end
   end
-
-
 end
+
