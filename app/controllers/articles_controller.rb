@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
 
     if !logged_in?
       flash[:error] = "Please login first"
-      redirect_to(new_login_path)
+      redirect_to(login_path)
     end 
   
   end

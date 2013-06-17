@@ -14,11 +14,11 @@
 <% if logged_in? %> 
     <%= link_to "Logout (#{current_user.user_name})", logout_path, :method => :delete %></span>
   <% else %>
-    <%= link_to 'Login/Register', new_login_path,:method => :get %>
+    <%= link_to 'Login/Register', login_path %>
   <% end %>
 </p>
 
-<% [:notice,:error,:alert].each do |key| %>
+<% [:notice, :error, :alert].each do |key| %>
   <% if flash[key] %>
     <%= flash[key] %>
   <% end %>
