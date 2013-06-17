@@ -1,7 +1,7 @@
 Hackernews::Application.routes.draw do
 
   resources :users do
-    resources :submissions
+    resources :submissions, :only => [:index]
   end
   resources :articles
   resource :login 

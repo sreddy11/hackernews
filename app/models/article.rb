@@ -10,7 +10,11 @@ class Article < ActiveRecord::Base
 
   
   def domain
-     URI.parse(url).host
+    begin
+      URI.parse(url).host
+    rescue Exception 
+      ''
+    end
   end
 
 

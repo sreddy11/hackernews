@@ -3,24 +3,23 @@ require 'spec_helper'
 describe Article do
 
   describe "#url_domain" do
-    let!(:articles) { [] }
-    before do
-      30.times do |i|
-        articles.push(FactoryGirl.create(:article))
-      end
-      #get :index
+    
+    let!(:article) { FactoryGirl.create(:article, {:url => 'http://news.com/321321'}) }
+    let!(:unparseable_url) { FactoryGirl.create(:article, {:url => 'http://:1234'}) }
+
+    it "checks the domain returns a valid name" do
+        article.domain.should == "news.com"
+    end
+    
+    it "domain method URI.parse throws exception" do
+      unparseable_url.domain.should == ""
     end
 
-    it "checks the domain" do
-      articles.each do |article|
-        article.domain.should == "cnn.com"
-      end
-    end
   end
    
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:url) }
-  #it { should allow_value('https://cnn.com') }
+  it { should allow_value('https://cnn.com').for(:url) }
+  it { should_not allow_value('not_a_url').for(:url) }
 
-  #pending "add some examples to (or delete) #{__FILE__}"
 end
