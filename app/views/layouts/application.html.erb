@@ -32,14 +32,14 @@
 
 </head>
 <body>
-<br></br>
-<br></br>
+<br>
+<br>
 
-<% [:notice,:error,:alert].each do |key| %>
+<% [:notice, :error, :alert].each do |key| %>
   <% if flash[key] %>
     <div class="alert">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <strong><%= "#{key.upcase}: " %></strong> <%= flash[key] %>  </div>
+      <strong><%= key.upcase %>:</strong><%= flash[key] %></div>
     
   <% end %>
 <% end %>
