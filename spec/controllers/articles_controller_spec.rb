@@ -99,7 +99,7 @@ describe ArticlesController do
 
       before do
         session[:user_id] = nil
-        get :new 
+        post :create 
       end
 
       it { should respond_with(:redirect) }
