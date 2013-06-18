@@ -7,5 +7,14 @@ class Article < ActiveRecord::Base
   validates :url, :format => /^https?:\/\//
 
   scope :recent, order("updated_at DESC")
+
+  
+  def domain
+    begin
+      URI.parse(url).host
+    rescue Exception 
+      ''
+    end
+  end
     
 end

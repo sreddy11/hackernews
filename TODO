@@ -1,0 +1,17 @@
+On articles_path page
+
+#Link to user on articles_path page
+#reformat post time
+#add link to show page
+grab root level domain(method on article model) => use URI class
+
+    describe Article do
+      describe "#url_domain" do
+        # method specs here
+      end
+    end
+
+restriction on registration if user is logged in
+be logged in when user creates account
+
+test methods logged_in? and current_user in application spec

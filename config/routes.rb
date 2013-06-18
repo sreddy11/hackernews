@@ -1,6 +1,8 @@
 Hackernews::Application.routes.draw do
 
-  resources :users
+  resources :users do
+    resources :submissions, :only => [:index] 
+  end
   resources :articles
   
   get 'login' => "logins#new"

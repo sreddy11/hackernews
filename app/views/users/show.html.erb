@@ -1,6 +1,4 @@
 <p> <%= @user.user_name %> </p>
 
-<p> Submissions</p>
-<% @user.articles.each do |article| %>
-  <p> <%= link_to article.title, article.url %> </p>
-<% end %>
+<p> <%= link_to "Submissions", user_submissions_path(@user) %> </p>
+

@@ -4,10 +4,12 @@ describe ApplicationController do
 
   describe "#logged_in?" do
     context "user is not logged in" do
+      
       before do
         session[:user_id] = nil
       end
-      it "test the method" do
+      
+      it "returns false" do
         controller.send(:logged_in?).should == false
       end
     end
@@ -16,7 +18,8 @@ describe ApplicationController do
       before do
         session[:user_id] = 1
       end
-      it "tests the method" do
+      
+      it "returns true" do
         controller.send(:logged_in?).should == true
       end
     end
@@ -27,7 +30,8 @@ describe ApplicationController do
       before do
         session[:user_id] = nil
       end
-      it "test the method" do
+      
+      it "returns nil" do
         controller.send(:current_user).should == nil
       end
     end
@@ -38,7 +42,8 @@ describe ApplicationController do
       before do
         session[:user_id] = user.id
       end
-      it "tests the method" do
+      
+      it "returns logged in user" do
         controller.send(:current_user).should == user
       end
     end

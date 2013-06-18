@@ -25,17 +25,10 @@ class ArticlesController < ApplicationController
   end
 
   private
- 
+
+
   def find_article
     @article = Article.find(params[:id])
   end
 
-  def require_authentication
-
-    if !logged_in?
-      flash[:error] = "Please login first"
-      redirect_to(login_path)
-    end 
-  
-  end
 end

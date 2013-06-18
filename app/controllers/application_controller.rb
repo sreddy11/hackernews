@@ -1,8 +1,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  private
+
+  rescue_from ActiveRecord::RecordNotFound, :with => :render_404
   
+  private
+
+  def render_404
+    render "public/404", :formats => [:html], :status => :not_found
+  end
+    
   def logged_in?
     session[:user_id] != nil
   end
@@ -16,12 +23,13 @@ class ApplicationController < ActionController::Base
       nil
     end
   end
+  
   helper_method(:current_user)
   
   def require_authentication
     unless logged_in?
       flash[:error] = "Please login first"
-      redirect_to(new_login_path)
+      redirect_to(login_path)
     end 
   end
 
