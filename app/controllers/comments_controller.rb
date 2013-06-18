@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
 
   before_filter :find_article
+  before_filter :require_authentication, :only => [:new, :create]
 
   def index
     @comments = @article.comments.recent

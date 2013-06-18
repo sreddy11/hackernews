@@ -32,20 +32,48 @@ describe CommentsController do
   end
 
   describe "Get to #new" do
-    before do
-      get :new, :article_id => new_article.id
-    end
-  
-    it { should respond_with(:success) }
+    
+    context "user not logged in" do
+     before do
+        session[:user_id] = nil
+        get :new, :article_id => new_article.id 
+      end
 
-    it "assigns the comment" do
-      assigns[:comment].should_not == nil
+      it { should respond_with(:redirect) }
+      it { should redirect_to(new_login_path) }
+    end
+    
+    
+    context "user logged in" do
+      before do
+        session[:user_id] = 1
+        get :new, :article_id => new_article.id
+      end
+    
+      it { should respond_with(:success) }
+
+      it "assigns the comment" do
+        assigns[:comment].should_not == nil
+      end
     end
   end
 
   describe "Post to #create" do
+    
+    context "user not logged in" do
+      before do
+        session[:user_id] = nil
+        post :create , :article_id => new_article.id
+      end
+
+      it { should respond_with(:redirect) }
+      it { should redirect_to(new_login_path) }
+ 
+    end
+    
     context "comment not blank" do
       before do
+        session[:user_id] = 1
         post :create, :article_id => new_article.id, :comment => {:body => "new comment"}
       end
 
@@ -55,6 +83,7 @@ describe CommentsController do
 
     context "comment is blank" do
       before do
+        session[:user_id] = 1
         post :create, :article_id => new_article.id 
 
       end
