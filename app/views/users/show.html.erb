@@ -1,4 +1,18 @@
 <p> <%= @user.user_name %> </p>
 
-<p> <%= link_to "Submissions", user_submissions_path(@user) %> </p>
-
+<div class="tabbable"> 
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Submissions</a></li>
+    <li><a href="#tab2" data-toggle="tab">Comments</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+      <% @user.articles.recent.each do |article| %>
+        <p> <%= link_to article.title, article.url %> </p>
+      <% end %>
+    </div>
+    <div class="tab-pane" id="tab2">
+      <p> Comments coming soon</p>
+    </div>
+  </div>
+</div>
