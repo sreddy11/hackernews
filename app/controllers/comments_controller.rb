@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   before_filter :require_authentication, :only => [:new, :create]
 
   def index
-    @comments = @article.comments.recent
+    @comments = Comment.find(:all, :order => "created_at DESC", :limit => 30) 
   end
 
   def show
