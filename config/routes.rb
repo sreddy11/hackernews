@@ -1,13 +1,13 @@
 Hackernews::Application.routes.draw do
 
   resources :users do
-    resources :submissions, :only => [:index] 
+    resources :submissions
   end
   
   resources :articles do
     resources :comments, :only => [:show, :new, :create]
   end
-
+  
   resources :comments do
     resources :comments
   end
