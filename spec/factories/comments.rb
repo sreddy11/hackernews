@@ -5,5 +5,7 @@ FactoryGirl.define do
     sequence(:body) { |n| "Comment #{n}"}
     article
     user
+    commentable_id  1
+    commentable_type "Article"
   end
 end

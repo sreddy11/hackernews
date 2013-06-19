@@ -19,28 +19,14 @@ class Article < ActiveRecord::Base
   end
 
   def num_comments
+    comments = Comment.all
     sum = 0
-    done = true
-    curr = self.comments
-    while (done)
-      curr.each  do |c|
-        sum +=1
-        if c.has_children? 
-          Rails.logger.debug("set done to false")
-          done = false
-        end
+    comments.each do |c|
+      if c.article == self
+        sum += 1
       end
-      temp = []
-      curr.each do |c|
-        temp += c.children.to_a
-        Rails.logger.debug("#{temp}")
-      end
-      curr = temp
     end
     return sum
-  
-        
-  end
-
+  end 
     
 end
