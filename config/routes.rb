@@ -16,6 +16,7 @@ Hackernews::Application.routes.draw do
   post 'login' => "logins#create"
   delete 'logout' => "logins#destroy"
   # The priority is based upon order of creation:
+    # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:

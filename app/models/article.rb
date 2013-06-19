@@ -1,4 +1,6 @@
 class Article < ActiveRecord::Base
+  include Commentable
+  
   attr_accessible :url, :title
 
   belongs_to :user
@@ -17,16 +19,4 @@ class Article < ActiveRecord::Base
       ''
     end
   end
-
-  def num_comments
-    comments = Comment.all
-    sum = 0
-    comments.each do |c|
-      if c.article == self
-        sum += 1
-      end
-    end
-    return sum
-  end 
-    
 end

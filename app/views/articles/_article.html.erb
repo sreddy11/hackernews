@@ -2,6 +2,6 @@
  
 <p> Posted by <%= link_to "#{article.user.user_name}", user_path(article.user) %> | 
 <%="#{time_ago_in_words(article.created_at)} ago" %> | 
-<%= link_to "#{article.num_comments} comments", article_path(article) %> 
+<%= link_to pluralize(article.num_comments, "comment"), article_path(article) %> 
 </p>
 

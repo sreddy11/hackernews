@@ -3,7 +3,6 @@
 FactoryGirl.define do
   factory :comment do
     sequence(:body) { |n| "Comment #{n}"}
-    article
     user
     commentable_id  1
     commentable_type "Article"

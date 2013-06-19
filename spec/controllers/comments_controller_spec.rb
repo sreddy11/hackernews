@@ -5,7 +5,7 @@ describe CommentsController do
   render_views
 
   let!(:new_article) { FactoryGirl.create(:article) }
-  let!(:comment) { FactoryGirl.create(:comment, :article => new_article) }
+  let!(:comment) { FactoryGirl.create(:comment) }
   let!(:parent) { FactoryGirl.create(:comment) }
 
   describe "GET to #index" do

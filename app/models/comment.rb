@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  include Commentable
+
   attr_accessible :body, :commentable_id, :commentable_type
 
   validates :body, :presence => true
@@ -6,41 +8,32 @@ class Comment < ActiveRecord::Base
   scope :recent, order("created_at DESC")
 
   belongs_to :user
-  belongs_to :article
 
   belongs_to :commentable, :polymorphic => true
 
-  has_many :comments, :as => :commentable
 
-  def has_parent?
-    commentable_type == "Comment"
+  def has_parent_comment?
+    commentable.is_a?(Comment)
   end
 
-  def parent
-    Comment.find(commentable_id)
-  end
 
+  alias_method :parent, :commentable
+  alias_method :children, :comments
+  
   def has_children?
-    Comment.where(:commentable_id => id, :commentable_type => "Comment").size > 0
+    comments.any?
   end
 
   def num_children?
-    Comment.where(:commentable_id => id, :commentable_type => "Comment").size 
+    comments.size 
   end
 
-  def children
-    Comment.where(:commentable_id => id, :commentable_type => "Comment")
-  end
-
+  
   def article
-    curr = self
-    while(true)
-      if curr.commentable_type == "Article"
-        return Article.find(curr.commentable_id)
-      else
-        curr = Comment.find(curr.commentable_id)
-      end
+    if parent.is_a?(Article)
+      parent
+    else
+      parent.article
     end
   end
-
 end
