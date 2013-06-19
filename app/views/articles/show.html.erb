@@ -1,8 +1,9 @@
 <%= render("article", :article => @article) %>
 
-<p> <button class="btn btn-primary" type="button">
-  <%= link_to "Add comment", new_article_comment_path(@article)%> 
-</button> </p>
+<p>   
+<%= link_to "Add comment", new_article_comment_path(@article), 
+  { :class=>" btn btn-primary"}%> 
+</p>
 
 <%= render("comments/comments", :comments => @article.comments) %>
 
