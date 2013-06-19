@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   before_filter :require_authentication, :only => [:new, :create]
 
   def index
-    @comments = Comment.find(:all, :order => "created_at DESC", :limit => 30) 
+    @comments = Comment.recent.limit(30)
   end
 
   def show
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
     @comment = @article.comments.new(params[:comment])
     @comment.user = current_user
     if @comment.save
-      redirect_to(@comment.article)
+      redirect_to(@article)
     else
       render(:new)
     end
