@@ -7,7 +7,11 @@ Hackernews::Application.routes.draw do
   resources :articles do
     resources :comments, :only => [:show, :new, :create]
   end
-  
+
+  resources :comments do
+    resources :comments
+  end
+
   get 'login' => "logins#new"
   post 'login' => "logins#create"
   delete 'logout' => "logins#destroy"

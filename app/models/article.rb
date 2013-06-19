@@ -8,7 +8,7 @@ class Article < ActiveRecord::Base
 
   scope :recent, order("updated_at DESC")
 
-  has_many :comments
+  has_many :comments, :as => :commentable
   
   def domain
     begin

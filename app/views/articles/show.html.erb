@@ -1,12 +1,11 @@
 <h2><%= link_to @article.title, @article.url %><font size="1"> <%="( #{@article.domain} )" %> </h2>
+<%= render("article", :article => @article) %>
 
  <table class = "table table-bordered table-hover">
     <% @article.comments.recent.each do |comment| %>
       <tr>
         <td>
-          <h6><%= comment.body %> </h6>
-          <p> Posted by <%= link_to comment.user.user_name, comment.user %>
-          | <%= time_ago_in_words(comment.created_at) %> ago </p>
+          <%= render("comments/comment", :comment => comment) %>
         </td>
       </tr>
     <% end %>
@@ -16,8 +15,4 @@
 <%= link_to "Add comment", new_article_comment_path(@article), 
   { :class=>" btn btn-primary"}%> 
 </p>
-
-
-
-
 

@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  before_filter :find_article
+  before_filter :find_parent
   before_filter :require_authentication, :only => [:new, :create]
 
   def index
@@ -8,18 +8,24 @@ class CommentsController < ApplicationController
   end
 
   def show
-    @comment = @article.comments.find(params[:id])
+    if @parent != nil 
+      @comment = @parent.comments.find(params[:id])
+    else
+      @comment = Comment.find(params[:id])
+    end
   end
 
   def new
-    @comment = @article.comments.new
+    @comment = @parent.comments.new
   end
 
   def create
-    @comment = @article.comments.new(params[:comment])
+    @comment = @parent.comments.new(params[:comment])
+    @comment.commentable_type = @parent.class.name
+    @comment.commentable_id = @parent.id
     @comment.user = current_user
     if @comment.save
-      redirect_to(@article)
+      redirect_to(@parent)
     else
       render(:new)
     end
@@ -27,7 +33,12 @@ class CommentsController < ApplicationController
   
   private
 
-  def find_article
-    @article = Article.find(params[:article_id])
+  def find_parent
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        @parent =  $1.classify.constantize.find(value)
+      end
+    end
+    nil
   end
 end
