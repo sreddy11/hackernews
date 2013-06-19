@@ -5,7 +5,7 @@ Hackernews::Application.routes.draw do
   end
   
   resources :articles do
-    resources :comments
+    resources :comments, :except => [:index]
   end
  
   get 'login' => "logins#new"

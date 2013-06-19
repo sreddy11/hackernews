@@ -1,7 +1,6 @@
 class LoginsController < ApplicationController
   
   before_filter :require_no_authentication, :only => [:new, :create]
-  before_filter :previous_page, :only => [:new, :destroy]
   
   def new
   end
@@ -12,6 +11,7 @@ class LoginsController < ApplicationController
       session[:user_id] = @user.id
       flash[:notice] = "Login Successful"
       redirect_to(session[:return_page])
+      session[:return_page] = nil
     else
       flash.now[:error] = "Login Invalid"
       render(:new)
@@ -21,7 +21,8 @@ class LoginsController < ApplicationController
   def destroy
     session[:user_id] = nil
     flash[:notice] = "Logout Successful"
-    redirect_to(session[:return_page])
+    redirect_to(request.referer)
+    session[:return_page] = nil
   end
 
   private
@@ -30,8 +31,5 @@ class LoginsController < ApplicationController
     params[:login] || {}
   end
 
-  def previous_page
-      session[:return_page] = request.referer
-  end
 
 end

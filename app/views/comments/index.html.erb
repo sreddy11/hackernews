@@ -1,5 +1,5 @@
  <table class = "table table-bordered table-hover">
-    <% @comments.each do |comment| %>
+   <% Comment.find(:all, :order => "created_at DESC", :limit => 30).each do |comment| %>
       <tr>
         <td>
           <h6><%= comment.body %> </h6>
