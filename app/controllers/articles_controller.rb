@@ -35,13 +35,6 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def require_authentication
-    if !logged_in?
-      session[:submit] = new_article_path
-      flash[:error] = "Please login first"
-      redirect_to(new_login_path)
-    end 
-  end
 
   
 end

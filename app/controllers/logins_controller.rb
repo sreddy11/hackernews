@@ -31,12 +31,7 @@ class LoginsController < ApplicationController
   end
 
   def previous_page
-    if session[:submit] != nil
-      session[:return_page] = session[:submit]
-    else
       session[:return_page] = request.referer
-    end
-    session[:submit] = nil
   end
 
 end

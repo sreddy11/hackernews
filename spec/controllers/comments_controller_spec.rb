@@ -40,7 +40,7 @@ describe CommentsController do
       end
 
       it { should respond_with(:redirect) }
-      it { should redirect_to(new_login_path) }
+      it { should redirect_to(login_path) }
     end
     
     
@@ -67,7 +67,7 @@ describe CommentsController do
       end
 
       it { should respond_with(:redirect) }
-      it { should redirect_to(new_login_path) }
+      it { should redirect_to(login_path) }
  
     end
     

@@ -25,8 +25,8 @@
             <li class="<%='active' if current_page?(logout_path) %>">
             <%= link_to "Logout (#{current_user.user_name})", logout_path, :method => :delete %></span>
           <% else %>
-            <li class="<%='active' if current_page?(new_login_path || new_user_path)%>">
-            <%= link_to 'Login/Register', new_login_path %>
+            <li class="<%='active' if current_page?(login_path || new_user_path)%>">
+            <%= link_to 'Login/Register', login_path %>
           <% end %>
         </ul>
       </div>

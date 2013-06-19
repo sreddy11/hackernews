@@ -1,15 +1,12 @@
 <h1> Add comment </h1>
 
-<% if session[:user_id] == nil %>
-  <p> redirect_to(login_path) </p>
-<% else %>
-  <%= form_for [:article, @comment] do |f| %>
-    <p>
-      <%= f.label :body %>
-      <%= f.text_area :body %>
-    </p>
-    <p>
-      <%= f.submit %>
-    </p>
-  <% end %>
+<%= form_for [:article, @comment] do |f| %>
+  <p>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
 <% end %>
+

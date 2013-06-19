@@ -20,9 +20,8 @@ class ApplicationController < ActionController::Base
   
   def require_authentication
     if !logged_in?
-      session[:return_page] = request.referer
       flash[:error] = "Please login first"
-      redirect_to(new_login_path)
+      redirect_to(login_path)
     end 
   end
 

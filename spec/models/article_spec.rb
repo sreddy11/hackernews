@@ -20,7 +20,7 @@ describe Article do
    
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:url) }
-  #it { should allow_value('https://cnn.com') }
+  it { should allow_value('https://cnn.com').for(:url) }
+  it { should_not allow_value('not_a_url').for(:url) }
 
-  #pending "add some examples to (or delete) #{__FILE__}"
 end

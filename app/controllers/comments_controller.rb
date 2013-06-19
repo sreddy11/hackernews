@@ -17,7 +17,6 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @article.comments.new(params[:comment])
-    @comment.article = @article
     @comment.user = current_user
     if @comment.save
       redirect_to(@comment.article)
