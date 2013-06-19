@@ -1,7 +1,7 @@
-<h6><%= link_to article.title, article.url %> <small> <%="(#{article.domain})" %> </small></h6>
+<h4><%= link_to article.title, article.url %> <small> <%="(#{article.domain})" %> </small></h4>
  
 <p> Posted by <%= link_to "#{article.user.user_name}", user_path(article.user) %> | 
 <%="#{time_ago_in_words(article.created_at)} ago" %> | 
-<%= link_to "#{article.comments.count} comments", article_path(article) %> 
+<%= link_to "#{article.num_comments} comments", article_path(article) %> 
 </p>
 
