@@ -7,18 +7,7 @@ describe CommentsController do
   let!(:new_article) { FactoryGirl.create(:article) }
   let!(:comment) { FactoryGirl.create(:comment, :article => new_article) }
 
-  describe "GET to #index" do
-          
-    before do
-      get :index, :article_id => new_article.id
-    end
-
-     it { should respond_with(:success) }
-     it "assigns the comment" do
-       assigns[:comments] = [comment]
-     end 
-  end
-
+ 
    describe "Get to #show" do
     before do
       get :show, :article_id => new_article.id,  :id => comment.id

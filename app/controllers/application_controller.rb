@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   
   def require_authentication
     unless logged_in?
-      session[:return_page] = request.referer
+      session[:return_page] = request.fullpath
       flash[:error] = "Please login first"
       redirect_to(login_path)
     end 
@@ -35,9 +35,8 @@ class ApplicationController < ActionController::Base
 
   def require_no_authentication
     if logged_in?
-      session[:return_page] = request.referer
       flash.now[:error] = "Already logged in"
-      redirect_to(session[:return_page])
+      redirect_to(request.referer)
     end 
   end
  
