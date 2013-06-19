@@ -21,8 +21,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @parent.comments.new(params[:comment])
-    @comment.commentable_type = @parent.class.name
-    @comment.commentable_id = @parent.id
+    @comment.commentable = @parent   
     @comment.user = current_user
     if @comment.save
       redirect_to(@parent)

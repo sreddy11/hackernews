@@ -30,5 +30,4 @@ class LoginsController < ApplicationController
     params[:login] || {}
   end
 
-
 end
