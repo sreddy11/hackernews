@@ -8,4 +8,6 @@ describe User do
   it { should ensure_length_of(:password).is_at_least(6) }
   it { should have_many(:articles) }
 
+  it { should have_many(:comments) }
+
 end

@@ -26,7 +26,6 @@ class ArticlesController < ApplicationController
 
   private
 
-
   def find_article
     @article = Article.find(params[:id])
   end
