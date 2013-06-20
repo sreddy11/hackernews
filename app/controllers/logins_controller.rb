@@ -30,8 +30,4 @@ class LoginsController < ApplicationController
   def login_params 
     params[:login] || {}
   end
-<<<<<<< HEAD
-=======
-
->>>>>>> 2a10941... Made minor changes
 end
