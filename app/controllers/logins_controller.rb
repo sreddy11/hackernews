@@ -10,7 +10,11 @@ class LoginsController < ApplicationController
     if @user && @user.authenticate(login_params[:password])
       session[:user_id] = @user.id
       flash[:notice] = "Login Successful"
-      redirect_to(session[:return_page])
+      if session[:return_page]
+        redirect_to(session[:return_page])
+      else
+        redirect_to(articles_path)
+      end
       session[:return_page] = nil
     else
       flash.now[:error] = "Login Invalid"
