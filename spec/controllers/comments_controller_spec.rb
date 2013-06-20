@@ -8,6 +8,12 @@ describe CommentsController do
   let!(:comment) { FactoryGirl.create(:comment) }
   let!(:parent) { FactoryGirl.create(:comment) }
 
+  describe Comment do
+    it_behaves_like "a commentable" do
+      let!(:commentable) {FactoryGirl.create(:comment)}
+    end
+  end
+
   describe "GET to #index" do
           
     context "parent is article" do 

@@ -13,6 +13,16 @@ module Commentable
     end
 
     count
-  end 
+  end
+
+   
+  def has_children?
+    comments.any?
+  end
+
+  def num_children?
+    comments.size 
+  end
+
 end
 
