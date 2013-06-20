@@ -6,7 +6,7 @@ shared_examples_for "a commentable" do
     
     context "should not have any comment" do
       it "should return false" do
-        commentable.has_children?.should == false
+        commentable.has_comments?.should == false
       end
     end
 
@@ -14,7 +14,7 @@ shared_examples_for "a commentable" do
       let!(:comment) { FactoryGirl.create(:comment, :commentable => commentable) }
 
       it "should return true" do
-        commentable.has_children?.should == true
+        commentable.has_comments?.should == true
       end
     end
   end
@@ -22,7 +22,7 @@ shared_examples_for "a commentable" do
   describe "num children" do
     context "has no child" do
      it "should return 0" do
-       commentable.num_children?.should == 0
+       commentable.num_replies.should == 0
      end
     end
     
@@ -30,12 +30,13 @@ shared_examples_for "a commentable" do
       let!(:comment) { FactoryGirl.create(:comment, :commentable => commentable) }
       let!(:nested_comment) { FactoryGirl.create(:comment, :commentable => comment) } 
       
-      it "original comment/article should have 1 child" do
-        commentable.num_children?.should == 1  
+      it "original comment/article should have 1 reply/2 total comments" do
+        commentable.num_replies.should == 1 
+        commentable.num_comments.should == 2
       end
 
       it "created comment should have nested comment" do
-        comment.num_children?.should == 1
+        comment.num_replies.should == 1
       end
     end
   end

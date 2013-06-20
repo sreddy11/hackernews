@@ -16,11 +16,11 @@ module Commentable
   end
 
    
-  def has_children?
+  def has_comments?
     comments.any?
   end
 
-  def num_children?
+  def num_replies
     comments.size 
   end
 

@@ -7,7 +7,7 @@
   <% if comment.has_parent_comment? %>
     | <%= link_to "Parent", comment.parent %>
   <% end %>
-  <% if comment.has_children? %>
+  <% if comment.has_comments? %>
     | <%= link_to pluralize(comment.children.count, "reply"), comment_comments_path(comment) %>
   <% end %>
   | <%= link_to "on: #{comment.article.title}", comment.article %>
