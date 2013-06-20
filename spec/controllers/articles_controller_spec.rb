@@ -5,9 +5,6 @@ describe ArticlesController do
   render_views
 
 
-  it_behaves_like "a commentable" do
-    let!(:commentable) {FactoryGirl.create(:article)}
-  end
 
   describe "GET to #index" do
     let!(:articles) { [] }
