@@ -1,9 +1,15 @@
 <%= render("article", :article => @article) %>
 
-<p>   
-<%= link_to "Add comment", new_article_comment_path(@article), 
-  { :class=>" btn btn-primary"}%> 
-</p>
+
+<%= form_for [@article, @comment] do |f| %>
+  <p>
+      <%= f.text_area :body, :size => "30x10" %>
+  </p>
+  <p>
+    <%= f.submit "Add comment" %>
+  </p>
+<% end %>
+
 
 <%= render("comments/comments", :comments => @article.comments) %>
 
