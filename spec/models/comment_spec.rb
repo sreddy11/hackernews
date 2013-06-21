@@ -9,5 +9,5 @@ describe Comment do
     let!(:commentable) {FactoryGirl.create(:comment)}
   end
   
-
+  it { should have_many(:votes) }
 end

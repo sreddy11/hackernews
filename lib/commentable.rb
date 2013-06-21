@@ -3,6 +3,7 @@ module Commentable
 
   included do
     has_many :comments, :as => :commentable
+    has_many :votes, :as => :votable
   end
 
   def num_comments
