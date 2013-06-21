@@ -19,16 +19,7 @@ class Comment < ActiveRecord::Base
 
   alias_method :parent, :commentable
   alias_method :children, :comments
-  
-  def has_children?
-    comments.any?
-  end
-
-  def num_children?
-    comments.size 
-  end
-
-  
+ 
   def article
     if parent.is_a?(Article)
       parent

@@ -4,6 +4,8 @@ describe ArticlesController do
 
   render_views
 
+
+
   describe "GET to #index" do
     let!(:articles) { [] }
     before do
