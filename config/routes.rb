@@ -6,12 +6,14 @@ Hackernews::Application.routes.draw do
   
   resources :articles do
     resources :comments, :only => [:show, :new, :create]
-    resources :votes, :only => [:new, :create, :destroy]
+    resource :upvotes, :only => [:create]
+    resource :downvotes, :only => [:create]
   end
   
   resources :comments do
     resources :comments, :except => [:index]
-    resource :votes, :only => [:new, :create, :destroy]
+    resource :upvotes, :only => [:create]
+    resource :downvotes, :only => [:create]
   end
 
   get 'login' => "logins#new"

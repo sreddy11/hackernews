@@ -4,9 +4,9 @@
 <p> Posted by <%= link_to article.user.user_name, article.user %> | 
 <%="#{time_ago_in_words(article.created_at)} ago" %> | 
 <%= link_to pluralize(article.num_comments, "comment"), article %> 
-<% if logged_in %>
-  | <%= link_to "Like", article_votes_path(article, {:up_or_down => 1}), :method => :post %> 
-  | <%= link_to "Dislike", article_votes_path(article, {:up_or_down => -1}), :method => :post%>
+<% if logged_in? %>
+    | <%= link_to "Like", article_upvotes_path(article), :method => :post %> 
+    | <%= link_to "Dislike", article_downvotes_path(article), :method => :post%>
 <% end %>
 </p>
 

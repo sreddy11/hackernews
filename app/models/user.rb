@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
 
   has_many :articles
   has_many :comments
-  
+  has_many :votes
+
   validates :user_name, :password, :password_confirmation, :presence => true
   validates :user_name, :uniqueness => true
   validates :password, :password_confirmation, :length => {:minimum => 6}
