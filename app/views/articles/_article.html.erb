@@ -7,7 +7,6 @@
 <% if logged_in %>
   | <%= link_to "Like", article_votes_path(article, {:up_or_down => 1}), :method => :post %> 
   | <%= link_to "Dislike", article_votes_path(article, {:up_or_down => -1}), :method => :post%>
-<% else %>
 <% end %>
 </p>
 
