@@ -2,6 +2,8 @@ require "set"
 
 shared_examples_for "a commentable" do
   
+  it { should have_many(:comments) }
+
   describe "has_children?" do
     
     context "should not have any comment" do
