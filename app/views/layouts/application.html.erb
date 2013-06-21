@@ -21,6 +21,8 @@
         <ul class="nav nav-pills">
           <li class="<%= 'active' if current_page?(new_article_path) %>">
           <%= link_to "Submit", new_article_path %></li>
+          <li class="<%= 'active' if current_page?(comments_path) %>">
+          <%= link_to "Comments", comments_path %></li>
           <% if logged_in? %> 
             <li class="<%='active' if current_page?(logout_path) %>">
             <%= link_to "Logout (#{current_user.user_name})", logout_path, :method => :delete %></span>

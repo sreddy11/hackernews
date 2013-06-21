@@ -26,7 +26,6 @@ class LoginsController < ApplicationController
     session[:user_id] = nil
     flash[:notice] = "Logout Successful"
     redirect_to(request.referer)
-    session[:return_page] = nil
   end
 
   private

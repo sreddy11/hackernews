@@ -13,6 +13,16 @@ module Commentable
     end
 
     count
-  end 
+  end
+
+   
+  def has_comments?
+    comments.any?
+  end
+
+  def num_replies
+    comments.size 
+  end
+
 end
 
