@@ -8,6 +8,11 @@ describe Comment do
   it_behaves_like "a commentable" do
     let!(:commentable) {FactoryGirl.create(:comment)}
   end
+
+  it_behaves_like "a votable" do
+    let!(:votable) {FactoryGirl.create(:comment)}
+  end
+
   
   it { should have_many(:votes) }
 end

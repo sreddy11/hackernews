@@ -39,17 +39,16 @@ describe UpvotesController do
 
       context "parent is comment" do
     
-        context "user already voted" do
+        before do 
+          session[:user_id] = user.id
+          post :create, :comment_id => parent.id
         end
 
-        context "user didnt vote" do
+        it "should save" do
+          parent.votes.count.should == 1
         end
-      
       end
-
-    
     end
-
   end
-
 end
+
