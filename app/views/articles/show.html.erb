@@ -3,7 +3,7 @@
 <% if logged_in? %>
   <%= form_for [@article, @comment] do |f| %>
     <p>
-        <%= f.text_area :body, :size => "30x10" %>
+      <%= f.text_area :body, :size => "30x10" %>
     </p>
     <p>
       <%= f.submit "Add comment" %>
@@ -15,7 +15,7 @@
 <%= render("comments/comments", :comments => @article.comments) %>
 
 <p>   
-<%= link_to "Add comment", new_article_comment_path(@article), 
+  <%= link_to "Add comment", new_article_comment_path(@article), 
   { :class=>" btn btn-primary"}%> 
 </p>
 
