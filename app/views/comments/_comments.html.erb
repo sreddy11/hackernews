@@ -2,7 +2,7 @@
 <% comments.recent.each do |comment| %>
   <ul>
   <%= render("comments/comment", :comment => comment) %>
-  <% if comment.has_children? %>
+  <% if comment.has_comments? %>
       <ul>
     <%= render("comments/comments", :comments => comment.children) %>
       </ul>

@@ -1,13 +1,14 @@
 <%= render("article", :article => @article) %>
 
-
-<%= form_for [@article, @comment] do |f| %>
-  <p>
-      <%= f.text_area :body, :size => "30x10" %>
-  </p>
-  <p>
-    <%= f.submit "Add comment" %>
-  </p>
+<% if logged_in? %>
+  <%= form_for [@article, @comment] do |f| %>
+    <p>
+        <%= f.text_area :body, :size => "30x10" %>
+    </p>
+    <p>
+      <%= f.submit "Add comment" %>
+    </p>
+  <% end %>
 <% end %>
 
 
