@@ -1,13 +1,14 @@
 
 <%= form_tag(ratings_path, :method => :get) do %>
-  <p> Filter by <%= select_tag :filter, options_for_select(["Year", "Month", "Day"], "Year") %> </p>
+  <p> Filter by <%= select_tag :filter, options_for_select(["Year", "Month", "Day"], "Day") %> </p>
   <p> Date: <%= select_date Date.today, :prefix => :filter_date, :order => [:month, :day, :year] %> </p>
   <p> <%= submit_tag "Search" %> </p>
 <% end %> 
 
 <% unless @ratings.nil? %>
 
-  <h5> Results for <%= @date.strftime('%b %d %Y') %> by <%= @filter %></h5>
+
+  <h5> Search for <%= @date.strftime('%b %d %Y') %> by <%= @filter %> returned <%= @ratings.size %> results</h5>
   <table class="table table-bordered table-hover">
       <% @ratings.each do |article| %>
         <tr>
