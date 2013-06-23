@@ -8,6 +8,8 @@ Hackernews::Application.routes.draw do
     resources :comments, :only => [:index, :show, :new, :create]
     resource :vote, :only =>[:create, :destroy]
   end
+
+  resources :ratings, :only => [:index]
   
   resources :comments do
     resources :comments

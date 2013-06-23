@@ -1,0 +1,19 @@
+
+<%= form_tag(ratings_path, :method => :get) do %>
+  <p> Filter by <%= select_tag :filter, options_for_select(["Year", "Month", "Day"], "Year") %> </p>
+  <p> Date: <%= select_date Date.today, :prefix => :filter_date, :order => [:month, :day, :year] %> </p>
+  <p> <%= submit_tag "Search" %> </p>
+<% end %> 
+
+<% unless @ratings.nil? %>
+<table class="table table-bordered table-hover">
+    <% @ratings.each do |article| %>
+      <tr>
+        <td>
+          <%= render("articles/article", :article => article) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
