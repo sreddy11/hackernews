@@ -6,14 +6,16 @@
 <% end %> 
 
 <% unless @ratings.nil? %>
-<table class="table table-bordered table-hover">
-    <% @ratings.each do |article| %>
-      <tr>
-        <td>
-          <%= render("articles/article", :article => article) %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
+
+  <h5> Results for <%= @date.strftime('%b %d %Y') %> by <%= @filter %></h5>
+  <table class="table table-bordered table-hover">
+      <% @ratings.each do |article| %>
+        <tr>
+          <td>
+            <%= render("articles/article", :article => article) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
 <% end %>
 
