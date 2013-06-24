@@ -1,4 +1,4 @@
-class DownvotesController < ApplicationController
+class DownvotesController < VotesController
  
   before_filter :assign_parent
   before_filter :require_authentication
@@ -11,13 +11,15 @@ class DownvotesController < ApplicationController
   end
 
   def destroy
-    current_vote.try(:destroy)
-    redirect_to(@parent)
+    #current_vote.try(:destroy)
+    #redirect_to(@parent)
+    super
   end
   
-  def current_vote
-    @current_vote ||= current_user.votes.for_votable(@parent).first
-  end
-
+  #private
+  
+  #def current_vote
+   # @current_vote ||= current_user.votes.for_votable(@parent).first
+  #end
 
 end
