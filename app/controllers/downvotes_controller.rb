@@ -11,9 +11,7 @@ class DownvotesController < ApplicationController
   end
 
   def destroy
-    if current_vote != nil
-      @current_vote.try(:destroy)
-    end
+    current_vote.try(:destroy)
     redirect_to(@parent)
   end
   
