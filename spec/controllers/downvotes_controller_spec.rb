@@ -9,14 +9,13 @@ describe DownvotesController do
   describe "POST to #create" do
     
     context "user not logged in" do
-        before do
-          session[:user_id] = nil
-          post :create, :article_id => article.id 
-        end
+      before do
+        session[:user_id] = nil
+        post :create, :article_id => article.id 
+      end
 
-        it { should respond_with(:redirect) }
-        it { should redirect_to(login_path) }
-
+      it { should respond_with(:redirect) }
+      it { should redirect_to(login_path) }
     end
 
     context "user logged in" do
@@ -34,7 +33,6 @@ describe DownvotesController do
           article.votes.count.should == 1
         end
       end
-
 
       context "parent is comment" do
     
@@ -69,17 +67,18 @@ describe DownvotesController do
     before do
       session[:user_id] = user.id
     end
+    
     context "parent is article" do
       let!(:downvote2) { FactoryGirl.create(:vote, {:votable => article, :user=> user, :up_or_down => -1}) }
-        before do 
-          delete :destroy, :article_id => article.id
-        end
+        
+      before do 
+        delete :destroy, :article_id => article.id
+      end
 
-        it "should create then destroy" do
-          article.votes(true).count.should == 0
-        end
+      it "should create then destroy" do
+        article.votes(true).count.should == 0
+      end
     end
-
 
     context "parent is comment" do
     
@@ -94,5 +93,4 @@ describe DownvotesController do
       end
     end
   end
-
 end

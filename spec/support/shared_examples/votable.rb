@@ -37,8 +37,4 @@ shared_examples_for "a votable" do
       end
     end
   end
-
-
-
- end
-
+end
