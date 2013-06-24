@@ -11,13 +11,13 @@ describe UpvotesController do
   describe "POST to #create" do
     
     context "user not logged in" do
-        before do
-          session[:user_id] = nil
-          post :create, :article_id => article.id 
-        end
+      before do
+        session[:user_id] = nil
+        post :create, :article_id => article.id 
+      end
 
-        it { should respond_with(:redirect) }
-        it { should redirect_to(login_path) }
+      it { should respond_with(:redirect) }
+      it { should redirect_to(login_path) }
 
     end
 
@@ -28,13 +28,13 @@ describe UpvotesController do
       end
 
       context "parent is article" do
-          before do 
-            post :create, :article_id => article.id
-          end
+        before do 
+          post :create, :article_id => article.id
+        end
 
-          it "should save" do
-            article.votes.count.should == 1
-          end
+        it "should save" do
+          article.votes.count.should == 1
+        end
       end
 
 
@@ -75,14 +75,15 @@ describe UpvotesController do
 
     context "parent is article" do
 
-     let!(:upvote2) { FactoryGirl.create(:vote, {:votable => article, :user=> user}) }
-        before do 
-          delete :destroy, :article_id => article.id
-        end
+      let!(:upvote2) { FactoryGirl.create(:vote, {:votable => article, :user=> user}) }
+      
+      before do 
+        delete :destroy, :article_id => article.id
+      end
 
-        it "should create then destroy" do
-          article.votes(true).count.should == 0
-        end
+      it "should create then destroy" do
+        article.votes(true).count.should == 0
+      end
     end
 
 
