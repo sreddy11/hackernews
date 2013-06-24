@@ -5,8 +5,16 @@
 <%="#{time_ago_in_words(article.created_at)} ago" %> | 
 <%= link_to pluralize(article.num_comments, "comment"), article %> 
 <% if logged_in? %>
+  <% unless article.votes.where(:user_id => current_user.id, :up_or_down => 1).any? %>
     | <%= link_to "Like", article_upvotes_path(article), :method => :post %> 
-    | <%= link_to "Dislike", article_downvotes_path(article), :method => :post%>
+  <% else %>
+    | <%= link_to "Undo My Like", article_upvotes_path(article), :method => :delete %> 
+  <% end %>
+  <% unless article.votes.where(:user_id => current_user.id, :up_or_down => -1).any?  %>
+    | <%= link_to "Dislike", article_downvotes_path(article), :method => :post %>
+  <% else %>
+    | <%= link_to "Undo My Dislike", article_downvotes_path(article), :method => :delete %> 
+  <% end %>    
 <% end %>
 </p>
 

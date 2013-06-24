@@ -11,8 +11,18 @@
   <% end %>
   | <%= link_to "on: #{comment.article.title}", comment.article %>
   <% if logged_in? %>
-    | <%= link_to "Like", comment_upvotes_path(comment), :method => :post %> 
-    | <%= link_to "Dislike", comment_downvotes_path(comment), :method => :post %>
+    <% unless comment.votes.where(:user_id => current_user.id, :up_or_down => 1).any? %>
+      | <%= link_to "Like", comment_upvotes_path(comment), :method => :post %> 
+    <% else %>
+      | <%= link_to "Undo My Like", comment_upvotes_path(comment), :method => :delete %> 
+    <% end %>
+    
+    <% unless comment.votes.where(:user_id => current_user.id, :up_or_down => -1).any?  %>
+      | <%= link_to "Dislike", comment_downvotes_path(comment), :method => :post %>
+    <% else %>
+      | <%= link_to "Undo My Dislike", comment_downvotes_path(comment), :method => :delete %> 
+    <% end %>    
+      
   <% end %>
 </p>
 

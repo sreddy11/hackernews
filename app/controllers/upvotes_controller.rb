@@ -16,6 +16,15 @@ class UpvotesController < ApplicationController
     redirect_to(@parent)
   end
 
+  def destroy
+    @vote = current_vote
+    unless @vote.nil?
+      @vote.destroy
+    end
+    redirect_to(@parent)
+
+  end
+
   private 
   
   def find_parent

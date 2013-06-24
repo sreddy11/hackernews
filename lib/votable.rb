@@ -12,6 +12,13 @@ module Votable
   def num_downvotes
     votes.where(:up_or_down => -1).count
   end
- 
+
+  def upvoted?
+    votes.where(:user => current_user, :up_or_down => 1).any?
+  end
+
+  def downvoted?
+    votes.where(:user => current_user, :up_or_down => -1).any?
+  end
 end
 
