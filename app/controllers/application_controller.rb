@@ -24,7 +24,15 @@ class ApplicationController < ActionController::Base
   end
   
   helper_method(:current_user)
-  
+
+  def find_parent
+    params.detect{ |k, v| k =~ /(.+)_id$/ and return $1.classify.constantize.find(v) }
+  end
+
+  def assign_parent
+    @parent = find_parent
+  end
+
   def require_authentication
     unless logged_in?
       session[:return_page] = request.fullpath

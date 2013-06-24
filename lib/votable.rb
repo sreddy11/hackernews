@@ -6,19 +6,27 @@ module Votable
   end
 
   def num_upvotes
-    votes.where(:up_or_down => 1).count
+    votes.upvotes.count
   end
 
   def num_downvotes
-    votes.where(:up_or_down => -1).count
+    votes.downvotes.count
   end
 
-  def upvoted?
-    votes.where(:user => current_user, :up_or_down => 1).any?
+  def user_vote(user)
+    votes.for_user(user).first
   end
 
-  def downvoted?
-    votes.where(:user => current_user, :up_or_down => -1).any?
+  def voted?(user)
+    upvoted?(user) || downvoted?(user)
+  end
+  
+  def upvoted?(user)
+    votes.for_user(user).upvotes.any?
+  end
+
+  def downvoted?(user)
+    votes.for_user(user).downvotes.any?
   end
 end
 

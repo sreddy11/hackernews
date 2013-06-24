@@ -3,27 +3,14 @@
   <h6><%= comment.body %> <small> <%= pluralize(comment.num_upvotes, "Like") %> 
       <%= pluralize(comment.num_downvotes, "Dislike") %> </small> </h6>
   
-  <p> Posted by <%= link_to "#{comment.user.user_name}", user_path(comment.user) %>
-  | <%="#{time_ago_in_words(comment.created_at)} ago" %>
-  | <%= link_to "Reply", new_comment_comment_path(comment), :method => :get %>
+  <p> Posted by <%= link_to comment.user.user_name, comment.user %>
+  | <%= time_ago_in_words(comment.created_at) %> ago
+  | <%= link_to "Reply", new_comment_comment_path(comment)%>
   <% if comment.has_comments? %>
     | <%= link_to pluralize(comment.children.count, "reply"), comment_comments_path(comment) %>
   <% end %>
   | <%= link_to "on: #{comment.article.title}", comment.article %>
-  <% if logged_in? %>
-    <% unless comment.votes.where(:user_id => current_user.id, :up_or_down => 1).any? %>
-      | <%= link_to "Like", comment_upvotes_path(comment), :method => :post %> 
-    <% else %>
-      | <%= link_to "Undo My Like", comment_upvotes_path(comment), :method => :delete %> 
-    <% end %>
-    
-    <% unless comment.votes.where(:user_id => current_user.id, :up_or_down => -1).any?  %>
-      | <%= link_to "Dislike", comment_downvotes_path(comment), :method => :post %>
-    <% else %>
-      | <%= link_to "Undo My Dislike", comment_downvotes_path(comment), :method => :delete %> 
-    <% end %>    
-      
-  <% end %>
-</p>
+  <%= render("shared/vote", :parent => comment) %>
+  </p>
 
 </table>

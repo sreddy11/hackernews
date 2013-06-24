@@ -1,0 +1,14 @@
+ <% if logged_in? %>
+    <% if !(parent.upvoted?(current_user)) %>
+      | <%= link_to "Like", [parent, :upvote], :method => :post %> 
+    <% else %>
+      | <%= link_to "Undo My Like", [parent, :upvote], :method => :delete %> 
+    <% end %>
+    
+    <% if !(parent.downvoted?(current_user))  %>
+      | <%= link_to "Dislike", [parent, :downvote], :method => :post %>
+    <% else %>
+      | <%= link_to "Undo My Dislike", [parent,:downvote], :method => :delete %> 
+    <% end %>    
+  <% end %>
+

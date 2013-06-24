@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  before_filter :find_parent
+  before_filter :assign_parent
   before_filter :require_authentication, :only => [:new, :create]
 
   def index
@@ -29,15 +29,5 @@ class CommentsController < ApplicationController
       render(:new)
     end
   end
-  
-  private
 
-  def find_parent
-    params.each do |name, value|
-      if name =~ /(.+)_id$/
-        @parent =  $1.classify.constantize.find(value)
-      end
-    end
-    nil
-  end
 end

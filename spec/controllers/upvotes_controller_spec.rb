@@ -2,11 +2,10 @@ require 'spec_helper'
 
 describe UpvotesController do
 
-  let!(:new_article) { FactoryGirl.create(:article) }
-  let!(:upvote) { FactoryGirl.create(:vote) }
-  let!(:parent) { FactoryGirl.create(:comment) }
+  let!(:article) { FactoryGirl.create(:article) }
   let!(:user) { FactoryGirl.create(:user) }
-
+  let!(:comment) { FactoryGirl.create(:comment) }
+  
 
   
   describe "POST to #create" do
@@ -14,7 +13,7 @@ describe UpvotesController do
     context "user not logged in" do
         before do
           session[:user_id] = nil
-          post :create, :article_id => new_article.id 
+          post :create, :article_id => article.id 
         end
 
         it { should respond_with(:redirect) }
@@ -24,28 +23,45 @@ describe UpvotesController do
 
     context "user logged in" do
 
-      context "parent is article" do
+      before do
+        session[:user_id] = user.id
+      end
 
+      context "parent is article" do
           before do 
-            session[:user_id] = user.id
-            post :create, :article_id => new_article.id
+            post :create, :article_id => article.id
           end
 
           it "should save" do
-            new_article.votes.count.should == 1
+            article.votes.count.should == 1
           end
       end
 
 
       context "parent is comment" do
-    
-        before do 
-          session[:user_id] = user.id
-          post :create, :comment_id => parent.id
+        
+        context "a vote does not already exist" do
+        
+          before do 
+            post :create, :comment_id => comment.id
+          end
+
+          it "should save" do
+            comment.votes.count.should == 1
+          end
         end
 
-        it "should save" do
-          parent.votes.count.should == 1
+        context "a vote already exists" do
+          let!(:vote) {FactoryGirl.create(:vote, {:votable => article, :up_or_down => -1, :user => user})}
+
+          before do 
+            post :create, :comment_id => comment.id
+          end
+
+          it "should save" do
+            comment.votes.count.should == 1
+            comment.votes.first.up_or_down.should == 1
+          end
         end
       end
     end
@@ -53,30 +69,33 @@ describe UpvotesController do
 
   describe "DELETE to #destroy" do
 
+    before do
+      session[:user_id] = user.id
+    end
+
     context "parent is article" do
 
+     let!(:upvote2) { FactoryGirl.create(:vote, {:votable => article, :user=> user}) }
         before do 
-          session[:user_id] = user.id
-          post :create, :article_id => new_article.id
-          delete :destroy, :article_id => new_article.id
+          delete :destroy, :article_id => article.id
         end
 
         it "should create then destroy" do
-          new_article.votes.count.should == 0
+          article.votes(true).count.should == 0
         end
     end
 
 
     context "parent is comment" do
     
+      let!(:upvote2) { FactoryGirl.create(:vote, {:votable => comment, :user => user}) }
+
       before do 
-        session[:user_id] = user.id
-        post :create, :comment_id => parent.id
-        delete :destroy, :comment_id =>parent.id
+        delete :destroy, :comment_id => comment.id     
       end
 
       it "should create then destroy" do
-        parent.votes.count.should == 0
+        comment.votes(true).count.should == 0
       end
     end
   end

@@ -6,7 +6,7 @@ shared_examples_for "a votable" do
 
   describe "num_upvotes" do
     
-    context "should not have any votes" do
+    context "doesn't have any votes" do
       it "should return zero" do
         votable.num_upvotes.should == 0
       end
@@ -23,7 +23,7 @@ shared_examples_for "a votable" do
 
   describe "num_downvotes" do
     
-    context "should not have any votes" do
+    context "doesn't have any votes" do
       it "should return zero" do
         votable.num_downvotes.should == 0
       end
