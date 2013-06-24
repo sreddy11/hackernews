@@ -1,5 +1,4 @@
 class VotesController < ApplicationController
-
   protected
 
   def create
@@ -15,6 +14,4 @@ class VotesController < ApplicationController
   def current_vote
     @current_vote ||= current_user.votes.for_votable(@parent).first
   end
-
-
 end
