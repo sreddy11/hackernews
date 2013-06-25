@@ -51,12 +51,11 @@ describe LoginsController do
 
      context "Valid login" do
        before do
-         session[:return_page] = "www.refer.com"
          post :create, :login => { :user_name => existing_user.user_name , :password => 'password' }
        end
 
        it { should respond_with(:redirect) }
-       it { should redirect_to("www.refer.com") }
+       it { should redirect_to(articles_path) }
        it "has login success" do
          flash[:notice].should == "Login Successful"
        end

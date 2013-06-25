@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
  
   before_filter :find_article, :only => [:show, :edit, :update, :destroy] 
-  before_filter :require_authentication, :only => [:new, :create] 
+  before_filter :require_authentication, :only => [:new, :create]
 
   def index
     @articles = Article.recent.paginate(:page=>params[:page], :per_page => 20)
@@ -29,4 +29,5 @@ class ArticlesController < ApplicationController
   def find_article
     @article = Article.find(params[:id])
   end
+
 end

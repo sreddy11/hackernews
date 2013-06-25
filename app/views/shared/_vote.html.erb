@@ -1,0 +1,21 @@
+ <% if logged_in? %>
+   <% if !(parent.upvoted?(current_user)) %>
+     <% if parent.is_a?(Comment) %>
+       | <%= link_to "Like", comment_vote_path(parent, :up_or_down => 1), :method => :post%> 
+     <% else %>
+       | <%= link_to "Like", article_vote_path(parent, :up_or_down => 1), :method => :post%>
+     <% end %>
+  <% else %>
+    | <%= link_to "Undo My Like", [parent, :vote], :method => :delete %> 
+  <% end %>
+
+  <% if !(parent.downvoted?(current_user))  %>
+    <% if parent.is_a?(Comment) %>
+      | <%= link_to "Dislike", comment_vote_path(parent, :up_or_down => -1), :method => :post%> 
+    <% else %>
+      | <%= link_to "Dislike", article_vote_path(parent, :up_or_down => -1), :method => :post%>
+    <% end %>
+  <% else %>
+    | <%= link_to "Undo My Dislike", [parent,:vote], :method => :delete %> 
+  <% end %>    
+<% end %>

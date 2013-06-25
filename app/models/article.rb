@@ -1,5 +1,6 @@
 class Article < ActiveRecord::Base
   include Commentable
+  include Votable
   
   attr_accessible :url, :title
 
@@ -10,7 +11,6 @@ class Article < ActiveRecord::Base
 
   scope :recent, order("updated_at DESC")
 
-  has_many :comments, :as => :commentable
   
   def domain
     begin

@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
   include Commentable
+  include Votable
 
   attr_accessible :body, :commentable_id, :commentable_type
 
@@ -11,11 +12,9 @@ class Comment < ActiveRecord::Base
 
   belongs_to :commentable, :polymorphic => true
 
-
   def has_parent_comment?
     commentable.is_a?(Comment)
   end
-
 
   alias_method :parent, :commentable
   alias_method :children, :comments
