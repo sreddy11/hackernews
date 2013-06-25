@@ -14,23 +14,26 @@
 
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"></a>
-      <a class="brand" href="<%= articles_path %>">Hacker News</a>
-      <div class="nav-collapse">
-        <ul class="nav nav-pills">
-          <li class="<%= 'active' if current_page?(new_article_path) %>">
-          <%= link_to "Submit", new_article_path %></li>
-          <li class="<%= 'active' if current_page?(comments_path) %>">
-          <%= link_to "Comments", comments_path %></li>
-          <% if logged_in? %> 
-            <li class="<%='active' if current_page?(logout_path) %>">
-            <%= link_to "Logout (#{current_user.user_name})", logout_path, :method => :delete %></span>
-          <% else %>
-            <li class="<%='active' if current_page?(login_path) || current_page?(new_user_path) %>">
-            <%= link_to 'Login/Register', login_path %>
-          <% end %>
-        </ul>
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"></a>
+        <a class="brand" href="<%= articles_path %>">Hacker News</a>
+        <div class="nav-collapse">
+          <ul class="nav nav-pills">
+            <li class="<%= 'active' if current_page?(new_article_path) %>">
+              <%= link_to "Submit", new_article_path %></li>
+            <li class="<%= 'active' if current_page?(comments_path) %>">
+              <%= link_to "Comments", comments_path %></li>
+            <% if logged_in? %> 
+              <li class="<%='active' if current_page?(logout_path) %>">
+                <%= link_to "Logout (#{current_user.user_name})", logout_path, :method => :delete %></span>
+              </li>
+            <% else %>
+              <li class="<%='active' if current_page?(login_path) || current_page?(new_user_path) %>">
+                <%= link_to 'Login/Register', login_path %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

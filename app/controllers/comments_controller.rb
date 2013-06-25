@@ -4,7 +4,11 @@ class CommentsController < ApplicationController
   before_filter :require_authentication, :only => [:new, :create]
 
   def index
-    @comments = Comment.recent.limit(30)
+    if @parent.nil?
+      @comments = Comment.recent.limit(30)
+    else
+      @comments = @parent.comments.recent.limit(30)
+    end
   end
 
   def show

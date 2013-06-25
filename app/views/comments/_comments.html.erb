@@ -4,7 +4,7 @@
   <%= render("comments/comment", :comment => comment) %>
   <% if comment.has_comments? %>
       <ul>
-    <%= render("comments/comments", :comments => comment.children) %>
+    <%= render("comments/comments", :comments => comment.comments) %>
       </ul>
   <% end %>
   </ul>

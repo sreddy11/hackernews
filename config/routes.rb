@@ -5,12 +5,12 @@ Hackernews::Application.routes.draw do
   end
   
   resources :articles do
-    resources :comments, :only => [:show, :new, :create]
+    resources :comments, :only => [:index, :show, :new, :create]
     resource :vote, :only =>[:create, :destroy]
   end
   
   resources :comments do
-    resources :comments, :except => [:index]
+    resources :comments
     resource :vote, :only => [:create, :destroy]
   end
 

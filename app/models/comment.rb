@@ -20,10 +20,10 @@ class Comment < ActiveRecord::Base
   alias_method :children, :comments
  
   def article
-    if parent.is_a?(Article)
+    if commentable.is_a?(Article)
       parent
     else
-      parent.article
+      commentable.article
     end
   end
 end
