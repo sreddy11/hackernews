@@ -1,4 +1,5 @@
-<p> <%= @user.user_name %> </p>
+<h4> <center> <%= @user.user_name %> </center> </h4>
+<h5> <center> Joined <%= time_ago_in_words(@user.created_at) %> ago </center> </h5>
 
 <div class="tabbable"> 
   <ul class="nav nav-tabs">
