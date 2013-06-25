@@ -23,7 +23,7 @@ class RatingsController < ApplicationController
         @ratings = Article.all(:conditions => ["created_at >= :start AND created_at <= :end", 
                              {:start => @date.beginning_of_day, :end => @date.end_of_day }]).
                              sort {|b,a| a.num_upvotes <=> b.num_upvotes}
-        @search_sreing = @date.strftime('%b %d %Y')
+        @search_string = @date.strftime('%b %d %Y')
       end
     else
       @date = Date.today
