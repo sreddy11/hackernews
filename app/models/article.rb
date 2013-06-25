@@ -11,7 +11,7 @@ class Article < ActiveRecord::Base
 
   scope :recent, order("updated_at DESC")
 
-  scope :in_date_range, lambda { |date, start, stop| where("created_at >= :start AND created_at <= :end",
+  scope :in_date_range, lambda { |start, stop| where("created_at >= :start AND created_at <= :end",
                                                           {:start => start, :end => stop})}
                              
   scope :by_rating, order("rating DESC")

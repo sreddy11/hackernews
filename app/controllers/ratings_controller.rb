@@ -1,15 +1,72 @@
 class RatingsController < ApplicationController
+
+  def index
+    @ratings = Article.in_date_range(start_date, end_date).by_rating
+  end
+ 
+ 
+  private
+ 
+  def filter_type
+    params[:filter].downcase || "day"
+  end
+  helper_method :filter_type
+ 
+  def current_date
+    DateTime.new(year,month,day)
+  end
+  helper_method :current_date
+ 
+  def search_string
+    case @filter
+    when "year"
+      @search_string = @date.strftime('%Y') 
+    when "month"
+      @search_string = @date.strftime('%b %Y') 
+    when "day"
+      @search_string = @date.strftime('%b %d %Y') 
+    end
+  end
+  helper_method :search_string
+ 
+ 
+  def filter_date_params
+    [month,day,year]
+  end
+ 
+  def start_date
+    current_date.send("beginning_of_#{filter_type}")
+  end
+ 
+  def end_date
+    current_date.send("end_of_#{filter_type}")
+  end
+ 
+  def day
+    params[:filter_date][:day].to_i unless params[:filter_date].nil?
+  end
+ 
+  def month
+    params[:filter_date][:month].to_i unless params[:filter_date].nil?
+  end
+ 
+  def year
+    params[:filter_date][:year].to_i unless params[:filter_date].nil?
+  end
+end
+
+=begin
   def index
     if parse_search
       set_params
-      @ratings = Article.in_date_range(@date,@start,@end).by_rating
+      @ratings = Article.in_date_range(@dat:e,@start,@end).by_rating
     end
   end
 
   private
 
   def parse_search
-    @filter = params[:filter] || "Day"
+    @filter = params[:filter] || "day"
     if !params[:filter_date].nil?
       @filter_date = params[:filter_date]
       @date = DateTime.new(@filter_date[:year].to_i, @filter_date[:month].to_i, @filter_date[:day].to_i)
@@ -38,3 +95,4 @@ class RatingsController < ApplicationController
     end
   end
 end
+=end
