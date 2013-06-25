@@ -2,7 +2,7 @@ class Comment < ActiveRecord::Base
   include Commentable
   include Votable
 
-  attr_accessible :body, :commentable_id, :commentable_type
+  attr_accessible :body, :commentable_id, :commentable_type, :rating
 
   validates :body, :presence => true
 

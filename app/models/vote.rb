@@ -16,6 +16,15 @@ class Vote < ActiveRecord::Base
 
   scope :for_user, lambda { |user| where(:user_id => user.id) }
 
+  after_save :recalculate_rating
+  after_destroy :recalculate_rating
+
   scope :upvotes, where(:up_or_down => 1)
   scope :downvotes, where(:up_or_down => -1)
+
+  private
+
+  def recalculate_rating
+    votable.update_attributes(:rating => votable.num_upvotes - votable.num_downvotes)
+  end
 end
