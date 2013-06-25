@@ -23,6 +23,8 @@
               <%= link_to "Submit", new_article_path %></li>
             <li class="<%= 'active' if current_page?(comments_path) %>">
               <%= link_to "Comments", comments_path %></li>
+            <li class="<%= 'active' if current_page?(ratings_path) %>">
+              <%= link_to "Top Rated", ratings_path %></li>
             <% if logged_in? %> 
               <li class="<%='active' if current_page?(logout_path) %>">
                 <%= link_to "Logout (#{current_user.user_name})", logout_path, :method => :delete %></span>
@@ -38,6 +40,7 @@
     </div>
   </div>
 
+  <br>
   <br>
   <br>
 

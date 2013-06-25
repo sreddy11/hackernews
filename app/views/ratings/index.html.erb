@@ -6,9 +6,7 @@
 <% end %> 
 
 <% unless @ratings.nil? %>
-
-
-  <h5> Search for <%= @date.strftime('%b %d %Y') %> by <%= @filter %> returned <%= @ratings.size %> results</h5>
+  <h5> Search for <%= @search_string %> by <%= @filter %> returned <%= pluralize(@ratings.size, "result") %></h5>
   <table class="table table-bordered table-hover">
       <% @ratings.each do |article| %>
         <tr>
