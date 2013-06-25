@@ -14,3 +14,34 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+$(function() {
+  var $filter  = $('select[name=filter]');
+  var $byMonth = $('select[name="filter_date[month]"]');
+  var $byDay   = $('select[name="filter_date[day]"]');
+  var $byYear  = $('select[name="filter_date[year]"]');
+
+  $filter.bind('change', function(e) {
+    console.log('change')
+
+    var $this = $(this);
+
+    var value = $this.find('option:selected').val();
+
+    if (value == 'Day') {
+      $byMonth.show();
+      $byDay.show();
+      $byYear.show();
+    } else if (value == 'Month') {
+      $byMonth.show();
+      $byDay.hide();
+      $byYear.show();
+    } else {
+      $byMonth.hide();
+      $byDay.hide();
+      $byYear.show();
+    }
+  });
+
+  $filter.trigger('change');
+});
