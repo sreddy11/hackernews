@@ -6,19 +6,13 @@ class RatingsController < ApplicationController
     if parse_search
       case @filter
       when "Year"
-        @ratings = Article.all(:conditions => ["created_at >= :start AND created_at <= :end", 
-                             {:start => @date.beginning_of_year, :end => @date.end_of_year }]).
-                             sort {|b,a| a.num_upvotes <=> b.num_upvotes}
+        @ratings = Article.by_year(@date)
         @search_string = @date.strftime('%Y') 
       when "Month"
-        @ratings = Article.all(:conditions => ["created_at >= :start AND created_at <= :end", 
-                             {:start => @date.beginning_of_month, :end => @date.end_of_month }]).
-                             sort {|b,a| a.num_upvotes <=> b.num_upvotes}
+        @ratings = Article.by_month(@date)
         @search_string = @date.strftime('%b %Y')
       when "Day"
-        @ratings = Article.all(:conditions => ["created_at >= :start AND created_at <= :end", 
-                             {:start => @date.beginning_of_day, :end => @date.end_of_day }]).
-                             sort {|b,a| a.num_upvotes <=> b.num_upvotes}
+        @ratings = Article.by_day(@date) 
         @search_string = @date.strftime('%b %d %Y')
       end
     end
