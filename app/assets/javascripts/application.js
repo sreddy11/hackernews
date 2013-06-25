@@ -22,8 +22,6 @@ $(function() {
   var $byYear  = $('select[name="filter_date[year]"]');
 
   $filter.bind('change', function(e) {
-    console.log('change')
-
     var $this = $(this);
 
     var value = $this.find('option:selected').val();
