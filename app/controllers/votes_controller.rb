@@ -1,9 +1,16 @@
 class VotesController < ApplicationController
-  protected
+  
+  before_filter :assign_parent
+  before_filter :require_authentication
 
   def create
-    @vote.save
-    redirect_to(@parent)
+    if @parent.voted?(current_user)
+      current_vote.update_attributes(:up_or_down => params[:up_or_down]) 
+    else
+      @vote = @parent.votes.new(:user_id => current_user.id, :up_or_down => params[:up_or_down])
+      @vote.save
+    end
+      redirect_to(@parent)
   end
   
   def destroy

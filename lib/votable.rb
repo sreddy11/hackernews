@@ -18,7 +18,7 @@ module Votable
   end
 
   def voted?(user)
-    upvoted?(user) || downvoted?(user)
+    votes.for_user(user).any?
   end
   
   def upvoted?(user)
