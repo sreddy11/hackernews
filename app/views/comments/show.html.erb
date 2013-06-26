@@ -1,2 +1,11 @@
 <%= render("comment", :comment => @comment) %>
+<br>
+<% @new_comment = @comment.comments.new %>
+<% if logged_in? %>
+  <%= form_for([@comment, @new_comment]) do |f| %>
+    <%= f.text_area :body, :size => "30X10" %>
+    <%= f.submit 'Add Comment'%>
+  <% end %>
+<% end %>
 
+<%= render("comments/comments", :comments => @comment.comments) %>

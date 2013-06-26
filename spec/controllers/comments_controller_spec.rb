@@ -174,7 +174,7 @@ end
         end
 
         it { should respond_with(:redirect) }
-        it { should redirect_to(comment_path(assigns[:comment].parent.id)) }
+        it { should redirect_to(assigns[:comment].article) }
       end
 
       context "comment is blank" do
@@ -188,8 +188,5 @@ end
         end
       end
     end
-
-
-
   end
 end
