@@ -11,11 +11,14 @@ describe User do
   it { should have_many(:comments) }
 
 
-  let!(:user) { FactoryGirl.create(:user) }
-  let!(:article) {FactoryGirl.create(:article, {:rating => 4, :user => user})}
-  let!(:comment) {FactoryGirl.create(:comment, {:rating => -2, :user => user})}
-   it "gets the karma points" do
-    user.karma_points.should == article.rating + comment.rating
+  describe "test karma_points method" do
+    let!(:user) { FactoryGirl.create(:user) }
+    let!(:article) {FactoryGirl.create(:article, {:rating => 4, :user => user})}
+    let!(:comment) {FactoryGirl.create(:comment, {:rating => -2, :user => user})}
+    
+    it "gets the karma points" do
+      user.karma_points.should == article.rating + comment.rating
+    end
   end
 
 end
