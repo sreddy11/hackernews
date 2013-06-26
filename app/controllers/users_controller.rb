@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_user_name!(params[:id])
+    @karma = karma_points
   end
 
   def new
@@ -21,4 +22,13 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
+  private
+
+  def karma_points
+    ratings = @user.articles.map{|a| a.rating} + @user.comments.map{|a| a.rating}
+    ratings.each.inject(0) {|sum,i| sum + i}
+  end
+    
+
 end

@@ -15,7 +15,7 @@ class Article < ActiveRecord::Base
                                                           {:start => start, :end => stop})}
                              
   scope :by_rating, order("rating DESC")
-  
+
   def domain
     begin
       URI.parse(url).host

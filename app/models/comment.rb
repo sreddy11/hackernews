@@ -8,6 +8,8 @@ class Comment < ActiveRecord::Base
 
   scope :recent, order("created_at DESC")
 
+  scope :by_user, lambda { |user| where(:user_id => user.id) }
+
   belongs_to :user
 
   belongs_to :commentable, :polymorphic => true

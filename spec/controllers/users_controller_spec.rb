@@ -4,6 +4,8 @@ describe UsersController do
   
   describe "GET to #show" do
     let!(:user) { FactoryGirl.create(:user) }
+    let!(:article) {FactoryGirl.create(:article, {:rating => 4, :user => user})}
+    let!(:comment) {FactoryGirl.create(:comment, {:rating => -2, :user => user})}
     
     before do
       get :show, :id => user.to_param
@@ -13,6 +15,9 @@ describe UsersController do
     
     it "assigns the user" do
       assigns[:user].should == user
+    end
+    it "gets the karma points" do
+      assigns[:karma].should == article.rating + comment.rating
     end
   end
 
