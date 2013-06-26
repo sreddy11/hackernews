@@ -9,6 +9,7 @@ gem 'sqlite3'
 
 gem 'will_paginate', '~> 3.0.4'
 gem 'twitter-bootstrap-rails', '~>2.2.7'
+gem 'validates_email_format_of', '~>1.5.3'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

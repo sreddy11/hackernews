@@ -1,16 +1,21 @@
 <h1> Register </h1>
 
-
-<ul>
-    <% @user.errors.full_messages.each do |error| %>
-      <li><%= error %></li>
-    <% end %>
-</ul>
+<% if @user %>
+  <ul>
+      <% @user.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+<% end %>
 
 <%= form_for @user do |f| %>
   <p>
     <%= f.label :user_name, "Username" %>
     <%= f.text_field :user_name %>
+  </p>
+  <p>
+    <%= f.label :email, "E-mail" %>
+    <%= f.text_field :email %>
   </p>
   <p>
     <%= f.label :password %>
