@@ -1,12 +1,12 @@
 
 <%= form_tag(ratings_path, :method => :get) do %>
   <p> Filter by <%= select_tag :filter, options_for_select(["Year", "Month", "Day"], params[:filter]) %> </p>
-  <p> Date: <%= select_date @date, :prefix => :filter_date, :order => [:month, :day, :year] %> </p>
+  <p> Date: <%= select_date current_date, :prefix => :filter_date, :order => [:month, :day, :year] %> </p>
   <p> <%= submit_tag "Search" %> </p>
 <% end %> 
 
 <% unless @ratings.nil? %>
-  <h5> Search for <%= @search_string %> by <%= @filter %> returned <%= pluralize(@ratings.size, "result") %></h5>
+  <h5> Search for <%= search_string %> returned <%= pluralize(@ratings.size, "result") %></h5>
   <table class="table table-bordered table-hover">
       <% @ratings.each do |article| %>
         <tr>
