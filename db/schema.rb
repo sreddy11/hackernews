@@ -11,24 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130621132658) do
+ActiveRecord::Schema.define(:version => 20130626135307) do
 
   create_table "articles", :force => true do |t|
-    t.string   "url",        :null => false
-    t.string   "title",      :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "url",                       :null => false
+    t.string   "title",                     :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "user_id"
+    t.integer  "rating",     :default => 0, :null => false
   end
+
+  add_index "articles", ["rating"], :name => "index_articles_on_rating"
 
   create_table "comments", :force => true do |t|
     t.text     "body"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "user_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
+    t.integer  "rating",           :default => 0, :null => false
   end
+
+  add_index "comments", ["rating"], :name => "index_comments_on_rating"
 
   create_table "users", :force => true do |t|
     t.string   "user_name"

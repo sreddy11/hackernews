@@ -5,11 +5,8 @@
   
   <p> Posted by <%= link_to comment.user.user_name, comment.user %>
   | <%= time_ago_in_words(comment.created_at) %> ago
-  | <%= link_to "Reply", new_comment_comment_path(comment)%>
+  | <%= link_to "View/Reply (#{pluralize(comment.children.count, "Reply")})", comment %>
   | <%= link_to "Parent", comment.commentable %>
-  <% if comment.has_comments? %>
-    | <%= link_to pluralize(comment.children.count, "reply"), comment_comments_path(comment) %>
-  <% end %>
   | <%= link_to "on: #{comment.article.title}", comment.article %>
   <%= render("shared/vote", :parent => comment) %>
   </p>

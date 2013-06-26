@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
     @comment.commentable = @parent   
     @comment.user = current_user
     if @comment.save
-      redirect_to(@parent)
+      redirect_to(@comment.article)
     else
       render(:new)
     end

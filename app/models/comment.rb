@@ -2,11 +2,12 @@ class Comment < ActiveRecord::Base
   include Commentable
   include Votable
 
-  attr_accessible :body, :commentable_id, :commentable_type
-
+  attr_accessible :body 
   validates :body, :presence => true
 
   scope :recent, order("created_at DESC")
+
+  scope :by_user, lambda { |user| where(:user_id => user.id) }
 
   belongs_to :user
 

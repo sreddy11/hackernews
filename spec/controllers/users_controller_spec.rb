@@ -4,7 +4,7 @@ describe UsersController do
   
   describe "GET to #show" do
     let!(:user) { FactoryGirl.create(:user) }
-    
+   
     before do
       get :show, :id => user.to_param
     end
@@ -14,7 +14,7 @@ describe UsersController do
     it "assigns the user" do
       assigns[:user].should == user
     end
-  end
+      end
 
   describe "GET to #new" do
      
