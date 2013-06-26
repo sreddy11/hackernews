@@ -84,6 +84,9 @@ describe VotesController do
       it "should create then destroy" do
         article.votes(true).count.should == 0
       end
+
+      it { should respond_with(:redirect) }
+      it { should redirect_to(article) }
     end
 
 

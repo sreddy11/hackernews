@@ -7,24 +7,29 @@ class RatingsController < ApplicationController
   private
  
   def filter_type
-    params[:filter].try(:downcase) || "day"
+    if ["Year", "Month", "Day"].include?(params[:filter])
+      params[:filter].try(:downcase) || "day" 
+    else
+      "day"
+    end
   end
   helper_method :filter_type
  
-  def current_date
+  def search_date
     @date ||= DateTime.new(year,month,day)
   end
-  helper_method :current_date
+  helper_method :search_date
  
   def search_string
-    
     @search_string ||= case filter_type
     when "year"
-      current_date.strftime('%Y') 
+      search_date.strftime('%Y') 
     when "month"
-      current_date.strftime('%b %Y') 
+      search_date.strftime('%b %Y') 
     when "day"
-      current_date.strftime('%b %d %Y') 
+      search_date.strftime('%b %d %Y')
+    else
+      search_date.strftime('%b %d %Y')
     end
   end
   helper_method :search_string
@@ -35,11 +40,11 @@ class RatingsController < ApplicationController
   end
  
   def start_date
-    current_date.send("beginning_of_#{filter_type}")
+    search_date.try("beginning_of_#{filter_type}")
   end
  
   def end_date
-    current_date.send("end_of_#{filter_type}")
+    search_date.try("end_of_#{filter_type}")
   end
  
   def day

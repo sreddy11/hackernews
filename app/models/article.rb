@@ -2,7 +2,7 @@ class Article < ActiveRecord::Base
   include Commentable
   include Votable
   
-  attr_accessible :url, :title, :rating
+  attr_accessible :url, :title
 
   belongs_to :user
 

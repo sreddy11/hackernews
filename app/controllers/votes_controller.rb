@@ -10,12 +10,20 @@ class VotesController < ApplicationController
       @vote = @parent.votes.new(:user_id => current_user.id, :up_or_down => params[:up_or_down])
       @vote.save
     end
+    if @parent.is_a?(Article)
       redirect_to(@parent)
+    else
+      redirect_to(@parent.article)
+    end
   end
   
   def destroy
     current_vote.try(:destroy)
-    redirect_to(@parent)
+    if @parent.is_a?(Article)
+      redirect_to(@parent)
+    else
+      redirect_to(@parent.article)
+    end
   end
   
   def current_vote

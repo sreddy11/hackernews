@@ -27,17 +27,17 @@ $(function() {
     var value = $this.find('option:selected').val();
 
     if (value == 'Day') {
-      $byMonth.show();
-      $byDay.show();
-      $byYear.show();
+      $byMonth.show().attr('disabled', false);
+      $byDay.show().attr('disabled', false);
+      $byYear.show().attr('disabled', false);
     } else if (value == 'Month') {
-      $byMonth.show();
-      $byDay.hide();
-      $byYear.show();
+      $byMonth.show().attr('disabled', false);;
+      $byDay.hide().attr('disabled', true);;
+      $byYear.show().attr('disabled', false);;
     } else {
-      $byMonth.hide();
-      $byDay.hide();
-      $byYear.show();
+      $byMonth.hide().attr('disabled', true);;
+      $byDay.hide().attr('disabled', true);;
+      $byYear.show().attr('disabled', false);;
     }
   });
 

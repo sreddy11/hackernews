@@ -2,8 +2,7 @@ class Comment < ActiveRecord::Base
   include Commentable
   include Votable
 
-  attr_accessible :body, :commentable_id, :commentable_type, :rating
-
+  attr_accessible :body 
   validates :body, :presence => true
 
   scope :recent, order("created_at DESC")

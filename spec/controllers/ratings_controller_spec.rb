@@ -47,9 +47,6 @@ describe RatingsController do
       it "should retrieve one article" do
         assigns[:ratings].should == [article2, article3]
       end
-    
     end
-  
   end
-
 end

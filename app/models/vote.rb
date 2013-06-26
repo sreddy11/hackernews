@@ -25,6 +25,6 @@ class Vote < ActiveRecord::Base
   private
 
   def recalculate_rating
-    votable.update_attributes(:rating => votable.num_upvotes - votable.num_downvotes)
+    votable.update_attribute(:rating, votable.num_upvotes - votable.num_downvotes)
   end
 end
