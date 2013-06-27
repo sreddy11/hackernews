@@ -33,8 +33,8 @@ describe UsersController do
     
     context "all fields are valid" do
       before do
-        post :create, :user => {:user_name => 'sreddy1', :password => 'password', :password_confirmation => 
-          'password'}  
+        post :create, :user => {:user_name => 'sreddy1', :email => "1@as.com", :password => 'password', 
+          :password_confirmation => 'password'}  
       end
 
       it { should redirect_to(articles_path) }

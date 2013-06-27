@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe RatingsController do
 
+  render_views
+
   describe "GET to #index" do
   
     context "filtered by year" do

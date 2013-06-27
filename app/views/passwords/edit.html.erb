@@ -1,4 +1,4 @@
-<%= form_for @user, :url => reset_password_path(params[:id]) do |f| %>
+<%= form_for @user, :url => password_path(:token => params[:token]) do |f| %>
   <% if @user.errors.any? %>
       <h2>Form is invalid</h2>
       <ul>

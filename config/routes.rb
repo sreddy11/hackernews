@@ -1,12 +1,12 @@
 Hackernews::Application.routes.draw do
 
-  get "reset_password/new"
+  #get "reset_password/new"
 
   resources :users do
     resources :submissions
   end
 
-  resources :reset_passwords
+  resource :password, :only => [:new, :edit, :update, :create]
   
   resources :articles do
     resources :comments, :only => [:index, :show, :new, :create]
