@@ -35,8 +35,7 @@ describe PasswordsController do
     context "Password request expired" do
       
       before do
-        user.reset_password_sent_at = 5.hours.ago
-        user.save
+        user.update_attribute(:reset_password_sent_at, 5.hours.ago)
         put :update, :token => user.reset_password_token, 
           :user => {:password => "password", :password_confirmation => "password"}
       end
