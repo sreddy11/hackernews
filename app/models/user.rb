@@ -9,9 +9,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :votes
 
-  validates :password, :confirmation => true
-    validates :user_name, :presence => true, :uniqueness => true
-  validates :password, :password_confirmation, :presence => true, :length => {:minimum => 6}, :on => :create
+  validates :user_name, :presence => true, :uniqueness => true
+  validates :password, :length => {:minimum => 6},:if => lambda {|a| a.password.present?}
   validates :email, :presence => :true, :uniqueness => :true, 
     :email_format => { message: "Not a valid e-mail format" }
   has_secure_password
