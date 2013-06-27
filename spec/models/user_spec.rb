@@ -31,7 +31,7 @@ describe User do
       user.send_password_reset
       previous = user.reset_password_token
       user.send_password_reset
-      user.reset_password_token.should_not eq(previous)
+      user.reset_password_token.should_not == previous
     end
 
     it "send the user an email" do

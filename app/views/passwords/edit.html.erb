@@ -6,7 +6,7 @@
           <li><%= message %></li>
         <% end %>
       </ul>
-  <% else %>
+  <% end %>  
     <p>
       <%= f.label :password %>
       <%= f.password_field :password %>
@@ -16,5 +16,4 @@
       <%= f.password_field :password_confirmation %>
     </p>
     <p><%= f.submit "Update Password" %><p>
-  <% end %>  
 <% end %>
