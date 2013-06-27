@@ -1,7 +1,5 @@
 Hackernews::Application.routes.draw do
 
-  #get "reset_password/new"
-
   resources :users do
     resources :submissions
   end

@@ -7,9 +7,9 @@ class PasswordsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user
       user.send_password_reset    
-      redirect_to articles_path, :notice => "E-mail has been sent regarding resetting password"
+      redirect_to articles_path, :notice => "E-mail has been sent regarding resetting password."
     else 
-      redirect_to articles_path, :notice => " No account matches the email provided"
+      redirect_to articles_path, :notice => "No account matches the e-mail provided."
     end
   end
 

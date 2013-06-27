@@ -7,12 +7,27 @@ describe PasswordsController do
   let!(:user) { FactoryGirl.create(:user, {:reset_password_token => "token", :reset_password_sent_at => Time.now})}
   
   describe "POST to create" do
+   context "valid email" do
+      before do
+        post :create, :email => user.email 
+      end
+      it { should respond_with(:redirect) }
+      it { should redirect_to(articles_path)}
+      it "checks the flash" do
+        flash[:notice].should == "E-mail has been sent regarding resetting password."
+      end
+   end
 
-    before do
-      post :create, :email => user.email 
-    end
-    it { should respond_with(:redirect) }
-    it { should redirect_to(articles_path)}
+   context "valid email" do
+      before do
+        post :create, :email => "112" 
+      end
+      it { should respond_with(:redirect) }
+      it { should redirect_to(articles_path)}
+      it "checks the flash" do
+        flash[:notice].should == "No account matches the e-mail provided."
+      end
+   end
   end
 
   describe "PUT to update" do
@@ -27,6 +42,9 @@ describe PasswordsController do
       end
       it { should respond_with(:redirect) }
       it { should redirect_to(new_password_path) }
+      it "checks the flash" do
+        flash[:alert].should == "Password reset has expired."
+      end
     end
 
     context "Password request no expired" do
@@ -38,10 +56,9 @@ describe PasswordsController do
       
       it { should respond_with(:redirect) }
       it { should redirect_to(articles_path)}
+      it "checks the flash" do
+        flash[:notice].should == "Password has been reset!"
+      end
     end
-      
   end
-
-
-
 end
