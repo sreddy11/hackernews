@@ -37,7 +37,6 @@ describe UsersController do
           'password'}  
       end
 
-      it { should respond_with(:redirect) }
       it { should redirect_to(articles_path) }
 
     end
