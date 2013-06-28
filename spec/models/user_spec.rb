@@ -25,9 +25,16 @@ describe User do
 
   describe "#set_new_token" do
     let!(:user) { FactoryGirl.create(:user) }
+    let!(:user2) { FactoryGirl.create(:user) }
+    
+    before do
+      user.set_new_token
+      user2.set_new_token
+    end
 
-    it "should create a new token for the user" do
-     user.set_new_token.should == user.reset_password_token
+
+    it "should ensure the tokens are unique" do
+     user2.reset_password_token.should_not == user.reset_password_token
     end
   end
   

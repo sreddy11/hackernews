@@ -36,7 +36,7 @@ class PasswordsController < ApplicationController
   end
 
   def check_expired
-    if @user.reset_password_sent_at < 4.hours.ago
+    if Time.now - @user.reset_password_sent_at > 4.hours
       redirect_to new_password_path, :alert => "Password reset has expired."
     end  
   end
