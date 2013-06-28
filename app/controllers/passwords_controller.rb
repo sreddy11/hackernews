@@ -9,7 +9,8 @@ class PasswordsController < ApplicationController
       user.send_password_reset    
       redirect_to articles_path, :notice => "E-mail has been sent regarding resetting password."
     else 
-      redirect_to articles_path, :notice => "No account matches the e-mail provided."
+      flash[:notice] = "No account matches the e-mail provided."
+      render :new
     end
   end
 
@@ -37,7 +38,7 @@ class PasswordsController < ApplicationController
 
   def check_expired
     if Time.now - @user.reset_password_sent_at > 4.hours
-      redirect_to new_password_path, :alert => "Password reset has expired."
+      redirect_to new_password_path, :alert => "Password reset request has expired."
     end  
   end
 end

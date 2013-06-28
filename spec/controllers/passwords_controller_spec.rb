@@ -27,8 +27,7 @@ describe PasswordsController do
         post :create, :email => "112" 
       end
       
-      it { should respond_with(:redirect) }
-      it { should redirect_to(articles_path)}
+      it { should respond_with(:success)}
       it "checks the flash" do
         flash[:notice].should == "No account matches the e-mail provided."
       end
@@ -48,7 +47,7 @@ describe PasswordsController do
       it { should respond_with(:redirect) }
       it { should redirect_to(new_password_path) }
       it "checks the flash" do
-        flash[:alert].should == "Password reset has expired."
+        flash[:alert].should == "Password reset request has expired."
       end
     end
 
