@@ -2,10 +2,10 @@
 
 <% if @user %>
   <ul>
-      <% @user.errors.full_messages.each do |error| %>
-        <li><%= error %></li>
-      <% end %>
-    </ul>
+    <% @user.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
 <% end %>
 
 <%= form_for @user do |f| %>
@@ -20,7 +20,7 @@
   <p>
     <%= f.label :password %>
     <%= f.password_field(:password) %>
-    </p>  
+  </p>  
   <p>
     <%= f.label :password_confirmation, "Confirm Password" %>
     <%= f.password_field(:password_confirmation) %>

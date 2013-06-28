@@ -13,7 +13,7 @@ describe User do
   it { should have_many(:comments) }
 
 
-  describe "test karma_points method" do
+  describe "#karma_points method" do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:article) {FactoryGirl.create(:article, {:rating => 4, :user => user})}
     let!(:comment) {FactoryGirl.create(:comment, {:rating => -2, :user => user})}
@@ -23,7 +23,15 @@ describe User do
     end
   end
 
-  describe "test send_reset_password method" do
+  describe "#set_new_token" do
+    let!(:user) { FactoryGirl.create(:user) }
+
+    it "should create a new token for the user" do
+     user.set_new_token.should == user.reset_password_token
+    end
+  end
+  
+  describe "#send_reset_password method" do
     let(:user) { FactoryGirl.create(:user) }
 
     it "generates a new reset_password_token each time" do

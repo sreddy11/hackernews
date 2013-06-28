@@ -7,10 +7,13 @@ describe PasswordsController do
   let!(:user) { FactoryGirl.create(:user, {:reset_password_token => "token", :reset_password_sent_at => Time.now})}
   
   describe "POST to create" do
-   context "valid email" do
+   
+    context "valid email" do
+      
       before do
         post :create, :email => user.email 
       end
+      
       it { should respond_with(:redirect) }
       it { should redirect_to(articles_path)}
       it "checks the flash" do
@@ -19,9 +22,11 @@ describe PasswordsController do
    end
 
    context "valid email" do
-      before do
+      
+     before do
         post :create, :email => "112" 
       end
+      
       it { should respond_with(:redirect) }
       it { should redirect_to(articles_path)}
       it "checks the flash" do
@@ -39,6 +44,7 @@ describe PasswordsController do
         put :update, :token => user.reset_password_token, 
           :user => {:password => "password", :password_confirmation => "password"}
       end
+      
       it { should respond_with(:redirect) }
       it { should redirect_to(new_password_path) }
       it "checks the flash" do

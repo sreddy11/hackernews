@@ -31,5 +31,6 @@ class User < ActiveRecord::Base
     begin
       self[:reset_password_token] = SecureRandom.urlsafe_base64
     end while User.exists?(:reset_password_token => self[:reset_password_token])
+    self[:reset_password_token]
   end
 end

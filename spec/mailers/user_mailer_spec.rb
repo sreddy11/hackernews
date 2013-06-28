@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe UserMailer do
   describe "reset_password" do
-    let!(:user) { FactoryGirl.create(:user, {:email => "abcd@yahoo.com", :reset_password_token => "token"}) }
+    let(:user) { FactoryGirl.create(:user, {:email => "abcd@yahoo.com", :reset_password_token => "token"}) }
     let(:mail) { UserMailer.reset_password(user) }
 
     it "checks the subject" do
