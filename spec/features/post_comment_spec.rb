@@ -4,10 +4,7 @@ describe "Make Comments" do
 
   let!(:user) { FactoryGirl.create(:user) }
   before do
-    visit '/login'
-    fill_in "login_user_name", :with => user.user_name
-    fill_in "Password", :with => user.password
-    click_button 'Login'
+    login(user)    
   end
   
   context "Comment on Article" do
@@ -22,7 +19,7 @@ describe "Make Comments" do
         click_button "Add Comment"
       end
 
-      it "should render a new form" do
+      it "renders a new form" do
         current_path.should == "/articles/1/comments"
       end
     end
@@ -33,7 +30,7 @@ describe "Make Comments" do
         click_button "Add Comment"
       end
 
-      it "should accept the comment" do
+      it "accepts the comment" do
         current_path.should == "/articles/1"
         page.should have_content("New comment")
       end
@@ -55,7 +52,7 @@ describe "Make Comments" do
         click_button "Add Comment"
       end
 
-      it "should render a new form" do
+      it "rendera a new form" do
         current_path.should == "/comments/1/comments"
       end
     end
@@ -65,7 +62,7 @@ describe "Make Comments" do
         click_button "Add Comment"
       end
 
-      it "should render a new form" do
+      it "renders a new form" do
         current_path.should == "/articles/1"
         page.should have_content("Reply to Comment")
       end

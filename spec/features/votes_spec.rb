@@ -6,10 +6,7 @@ describe "Vote" do
   let!(:article) { FactoryGirl.create(:article) }
 
   before do
-    visit '/login'
-    fill_in "login_user_name", :with => user.user_name
-    fill_in "Password", :with => user.password
-    click_button 'Login'
+    login(user)
   end
 
   context "upvoting" do
@@ -19,7 +16,7 @@ describe "Vote" do
         click_link "Like" 
       end
 
-      it "should register the vote" do
+      it "registers the vote" do
         current_path.should == '/articles/1'
         page.should have_content("Undo My Like")
       end
@@ -29,7 +26,7 @@ describe "Vote" do
           click_link "Undo My Like"
         end
 
-        it "should undo the vote" do
+        it "undoes the vote" do
           current_path.should == '/articles/1'
           page.should_not have_content("Undo My Like")
         end
@@ -40,7 +37,7 @@ describe "Vote" do
           click_link "Dislike"
         end
 
-        it "should switch the vote to dislike" do
+        it "switches the vote to dislike" do
           current_path.should == '/articles/1'
           page.should have_content("Undo My Dislike")
         end
@@ -50,7 +47,7 @@ describe "Vote" do
             click_link "Undo My Dislike"
           end
 
-          it "should undo the vote" do
+          it "undoes the vote" do
             current_path.should == '/articles/1'
             page.should_not have_content("Undo My Dislike")
           end

@@ -4,10 +4,7 @@ describe "Posting an article" do
 
   let!(:user) { FactoryGirl.create(:user) }
   before do
-    visit '/login'
-    fill_in "login_user_name", :with => user.user_name
-    fill_in "Password", :with => user.password
-    click_button 'Login'
+    login(user)    
     visit '/articles/new'
   end
 

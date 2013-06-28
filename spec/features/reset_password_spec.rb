@@ -7,7 +7,7 @@ describe "Reset lost password" do
     click_link "Forgot password"
   end
 
-  it "should be at the reset page" do
+  it "goes to the reset page" do
     current_path.should == '/password/new'
   end
 
@@ -20,7 +20,7 @@ describe "Reset lost password" do
         click_button "Reset Password"
       end
       
-      it "should render a new form" do
+      it "renders a new form" do
         current_path.should == '/password'
         page.should have_content("No account matches the e-mail provided.")
       end
@@ -35,7 +35,7 @@ describe "Reset lost password" do
         click_button "Reset Password"
       end
       
-      it "should render a new form" do
+      it "renders a new form" do
         current_path.should == '/articles'
         page.should have_content("E-mail has been sent regarding resetting password.")
       end
@@ -51,7 +51,7 @@ describe "Reset lost password" do
         visit "/password/edit?token=#{user.reset_password_token}"
       end
 
-      it "should have password fields" do
+      it "has password fields" do
         page.should have_content("Password confirmation")
         page.should have_content("Password")
       end
@@ -64,7 +64,7 @@ describe "Reset lost password" do
           click_button "Update Password"
         end
 
-        it "should render a new form" do
+        it "renders a new form" do
           page.should have_content("Password did not update. Please try again.")
           page.should have_content("Password is too short (minimum is 6 characters)")
           page.should have_content("Password doesn't match confirmation")
@@ -79,14 +79,11 @@ describe "Reset lost password" do
           click_button "Update Password"
         end
 
-        it "should reset the password" do
+        it "resets the password" do
           current_path.should == '/articles'
           page.should have_content("Password has been reset!")
         end
       end
-
-
-
     end
 
     context "Request expired" do
@@ -97,14 +94,10 @@ describe "Reset lost password" do
         visit "/password/edit?token=#{user.reset_password_token}"
       end
 
-      it "should have password fields" do
+      it "has password fields" do
         current_path.should == '/password/new'
         page.should have_content("Password reset request has expired")
       end
     end
-
   end
-    
-
-
 end

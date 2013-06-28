@@ -7,7 +7,7 @@ describe "Creating an account" do
     click_link "Need an account? Register here"
   end
 
-  it "should go to the new user page" do
+  it "goes to the new user page" do
     current_path.should == '/users/new'
   end
 
@@ -20,7 +20,7 @@ describe "Creating an account" do
       click_button "Create User"
     end
 
-    it "should create the account" do
+    it "creates the account" do
       current_path.should == '/articles'
       page.should have_content("Your Account (sreddy1) has been successfully created")
     end
@@ -36,7 +36,7 @@ describe "Creating an account" do
       click_button "Create User"
     end
 
-    it "should give new errors" do
+    it "gives new errors" do
       current_path.should == '/users'
       page.should have_content("User name has already been taken")
       page.should have_content("Password is too short (minimum is 6 characters")

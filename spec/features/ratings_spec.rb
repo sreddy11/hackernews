@@ -19,18 +19,18 @@ describe "Article ratings" do
         click_button "Search"
       end
       
-      it "should return the article" do
+      it "returns the article" do
         page.should have_content(article.title)
       end
     end
 
-    context "1 result" do
+    context "no results" do
       before do
         select 1.year.ago.year, :from => "filter_date_year"
         click_button "Search"
       end
       
-      it "should return the article" do
+      it "returns the article" do
         page.should_not have_content(article.title)
       end
     end
@@ -49,18 +49,18 @@ describe "Article ratings" do
         click_button "Search"
       end
       
-      it "should return the article" do
+      it "returns the article" do
         page.should have_content(article.title)
       end
     end
 
-    context "1 result" do
+    context "no results" do
       before do
         select 1.month.ago.strftime("%B"), :from => "filter_date_month"
         click_button "Search"
       end
       
-      it "should return the article" do
+      it "returns the article" do
         page.should_not have_content(article.title)
       end
     end
@@ -84,13 +84,13 @@ describe "Article ratings" do
       end
     end
 
-    context "1 result" do
+    context "no results" do
       before do
         select 1.day.ago.day, :from => "filter_date_day"
         click_button "Search"
       end
       
-      it "should return the article" do
+      it "returns the article" do
         page.should_not have_content(article.title)
       end
     end
