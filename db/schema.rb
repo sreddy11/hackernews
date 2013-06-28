@@ -41,10 +41,12 @@ ActiveRecord::Schema.define(:version => 20130628140207) do
     t.string   "password_digest"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
-    t.string   "email"
+    t.string   "email",                  :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
   create_table "votes", :force => true do |t|
     t.integer  "votable_id"
