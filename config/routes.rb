@@ -3,6 +3,8 @@ Hackernews::Application.routes.draw do
   resources :users do
     resources :submissions
   end
+
+  resource :password, :only => [:new, :edit, :update, :create]
   
   resources :articles do
     resources :comments, :only => [:index, :show, :new, :create]
