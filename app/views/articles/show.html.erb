@@ -11,11 +11,4 @@
   <% end %>
 <% end %>
 
-
 <%= render("comments/comments", :comments => @article.comments) %>
-
-<p>   
-  <%= link_to "Add comment", new_article_comment_path(@article), 
-  { :class=>" btn btn-primary"}%> 
-</p>
-
